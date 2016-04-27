@@ -1,0 +1,100 @@
+{% extends "nlr_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="/media/nin2/nin2.css" rel="stylesheet">
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<div class="nin-question">
+			<h3>
+				<span class="nin-question-sign glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				<span>{{problem.get_problem}}</span>
+			</h3>
+		</div>
+	
+		<div class="nin-exlain panel panel-default">
+			<div class="panel-body">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form class="form-horizontal" method="POST">
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		{% for choice in problem.get_choice_list %}
+			<div style="margin-bottom:12px;" class="col-md-3 col-sm-4 col-xs-12">
+				<div id="c{{forloop.counter}}" value="{{choice.value}}" class="thumbnail thumbnail-nin" style="margin-bottom: 5px; cursor:pointer;">
+					<img src="/media/img/buy/product_{{forloop.counter}}.png" />
+					<div style="padding: 8px;">
+						<h4>{{choice.label}}</h4>
+						<p>{{choice.explain}}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+ 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+			<div class="col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6">
+				<div class="input-group">
+					<input id="thumbnail-selected" type="hidden" name="choice1">
+					<input id="thumbnail-sum" type="number" class="thumbnail-sum-view form-control" name="choice2" readonly>
+					<span class="input-group-btn">
+						<button id="btn-next" style="float: right;" type="submit" class="btn btn-nin">Next!</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>	
+
+
+
+<script>
+	$(".thumbnail-nin").click(function(){
+		// check clicked thumbnail
+		var thumb_list = document.getElementsByClassName("thumbnail-active");
+		if($(this).hasClass("thumbnail-active")){
+			var next_length = thumb_list.length - 1;
+		} else {
+			var next_length = thumb_list.length + 1;
+		}
+		var opt = parseInt({{problem.get_option}})
+		if(next_length > opt && opt >= 0){
+			alert("최대 4개까지 선택하실 수 있습니다");
+			return false;
+		}
+		
+		// toggle class: ...-active
+		if($(this).hasClass("thumbnail-active")){
+			$(this).removeClass("thumbnail-active");
+		} else {
+			$(this).addClass("thumbnail-active");
+		}
+		
+		// input value set
+		var thumb_id_list = new Array();
+		var thumb_sum = 0;
+		for(var idx = 0; idx < thumb_list.length; idx++){
+			thumb_id_list.push(thumb_list[idx].id);
+			thumb_sum += parseInt(thumb_list[idx].getAttribute("value"));
+		}
+		$("#thumbnail-selected").val(thumb_id_list);
+		$("#thumbnail-sum").val(thumb_sum);
+		
+		// scroll
+		$("html, body").stop().animate({
+			scrollTop: $(this).offset().top - 50
+		});
+	});
+
+</script>
+
+{% endblock %}

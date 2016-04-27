@@ -1,0 +1,148 @@
+{% extends "nlr_ma_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<link href="{% static "new_nin2/nin2.css" %}" rel="stylesheet">
+<style>
+.modal.bottom-sheet{
+	max-height: 100%!important;
+	height: 90%!important;
+}
+#info-tui {
+	cursor: pointer;
+	text-align: left;
+	color: #ec423d;
+}
+</style>
+
+<div style="margin-top: 30px;" class="row">
+	<div class="col l6 offset-l3 m8 offset-m2 s12">
+		<div class="nin-question">
+			<h4 style="font-size: 24px;">
+				<i class="material-icons red-icons">question_answer</i>
+				<span>{{problem.get_problem}}</span>
+			</h4>		
+		</div>
+		<div class="card">
+			<div class="card-content">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>	
+		<div class="col s12">
+			<p id="info-tui">
+				<i style="font-size: 17px;" class="material-icons">info</i>
+				혹시 등록금을 모르시나요?
+			</p>
+		</div>
+
+		<form method="POST">
+		{% csrf_token %}
+			{% for choice in problem.get_choice_list %}
+			<div class="input-field col s12">
+				<input type="{{choice.inputtype}}" id="c{{forloop.counter}}"  name="choice{{forloop.counter}}" placeholder="{{choice.placeholder}}" min="1" step="1" required>
+				<label for="c{{forloop.counter}}">{{choice.label}}</label>
+			</div>
+			{% endfor %}
+			<button class="btn btn-right waves-effect waves-light red" type="submit">
+					Next!
+			</button>
+			<input type="hidden" name="pidx" value={{problem.idx}}>
+		</form>
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal-info-tui" class="modal bottom-sheet">
+	<div class="modal-content">
+    	<h5>대학과 학과를 선택해주세요</h5>
+		<div class="input-field">
+			<input type="text" id="univ-search" name="search_text" placeholder="대학 이름"/>
+		</div>
+		<div id="univ-list">
+		</div>
+		<div class="input-field col s12">
+			<select id="major-select">
+				<option value="" disabled selected>대학을 먼저 선택해주세요</option>
+			</select>
+		</div>
+		<div style="margin: 0px;" class="row">
+			<a href="http://www.academyinfo.go.kr/" style="color: #757575; float: right">
+				<i style="font-size: 17px;" class="material-icons">info</i>
+				등록금은 2015학년도 기준입니다 
+			</a>
+		</div>
+	</div>
+    <div style="margin-top: -20px;" class="modal-footer">
+		<a id="univ-choose" class="waves-effect waves-light btn red">선택</a>
+    </div>
+</div>
+<script>
+	function search_success(data, textStatus, jqXHR){
+		var data_json = JSON.parse(data);
+		var content = "";
+		for(var idx = 0; idx < data_json.length; idx++){
+			var this_json = data_json[idx];
+			content += "<a href='#!' class='collection-item' value='"
+			content += this_json["tut"]+"'>";
+			content += this_json["name"];
+			content += "</a>";
+		}
+		if(content != ""){
+			content = "<div id='univ-collection' class='collection'>" + content + "</div>"
+		}
+		$("#univ-list").html(content);
+	}
+	
+	$(function(){
+		$("#univ-search").keyup(function() {
+			$.ajax({
+				type: "GET",
+				data: {
+					"search_text": $("#univ-search").val(),
+				},
+				success: search_success,
+			});	
+		});
+	});
+	
+	$("body").on("click", "a.collection-item", function(){
+		$("#univ-search").val($(this).text());
+		var tut_list = $(this).attr("value").split(",");
+		var tut_name_list = ["인문사회", "자연과학", "예체능", "공학", "의학"];
+		content = '<option value="" disabled selected>학과를 선택해주세요</option>'
+		for(var idx = 0; idx < tut_list.length; idx++){
+			var tut = parseInt(tut_list[idx]);
+			if(tut > 0){
+				content += "<option value="+tut+">"+tut_name_list[idx]+"</option>";
+			}
+		}
+		$("#major-select").html(content);
+		$('select').material_select();
+		$("#univ-collection").remove();
+	});
+	
+	$("#univ-choose").click(function(){
+		$("#c1").val($("#major-select").val());
+		$("#modal-info-tui").closeModal();
+		if($("#major-select").val() == null){
+			$("#c1").focus();
+		} else {
+			$("#c2").focus();
+		}
+	});
+
+	
+	$(document).ready(function(){
+		$('select').material_select();
+	});
+
+	$("#info-tui").click(function(){
+		$("#modal-info-tui").openModal();
+	});
+	
+</script>
+
+
+
+{% endblock %}

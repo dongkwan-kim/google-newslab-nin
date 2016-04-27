@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+
+<link href="{% static "nin2/nin2.css" %}" rel="stylesheet">
+<style>
+	.thumbnail-active {
+		border-color: #EF5121;
+	}
+</style>
+
+<div style="margin:10px;" id="disable-wraper4position">
+
+<div class="row nin-head">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<img id="title-img" src="{% static "img/buy/title_buy.jpg" %}">
+		<hr class="tophr" ></hr>
+		<h3>사고 싶은 물건, 다 골라보세요</h3>
+		<p>돈이 없으니 일합시다. 얼마나 걸릴까요?</p>
+	</div>
+</div>
+
+<form class="form-horizontal" method="POST">
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+			{% for product in product_list %}
+			<div class="col-md-3 col-sm-4 col-xs-12">
+				<div class="thumbnail thumbnail-nin" style="cursor:pointer;" value="{{product.p_price}}">
+					<img src="/media/img/buy/product_{{forloop.counter}}.png" />
+					<div style="padding: 8px;">
+						<h4>Thumbnail label</h4>
+					    <p>부패를 살았으며, 우리 트고, 작고 봄바람이다. 그들의 같이, 살았으며, 가장 이것이다. 일월과 꽃이 착목한는 것이다.</p>
+					</div>
+				</div>
+
+			</div>
+			{% endfor %}
+ 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input id="post-price" type="hidden" name="post-price">
+					<button type="submit" class="btn btn-nin btn-lg btn-block">
+					<span id="total-price">0원</span>
+					벌러가기
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>	
+		
+</div><!--div id="wraper4position"-->
+
+
+<script>
+	function get_total_price(){
+		var total_price = 0;
+		thumb_arr = document.getElementsByClassName("thumbnail");
+		for(var idx = 0; idx < thumb_arr.length; idx++){
+			if(thumb_arr[idx].classList.contains("thumbnail-active")){
+				total_price += parseInt(thumb_arr[idx].getAttribute("value"));
+			}
+		}
+		return total_price;
+	}
+
+	$(".thumbnail-nin").click(function(){
+		if($(this).hasClass("thumbnail-active")){
+			$(this).removeClass("thumbnail-active");
+			//$(this).children("img").css("opacity", 1);
+		} else {
+			$(this).addClass("thumbnail-active");
+			//$(this).children("img").css("opacity", .5);
+		}
+		var t_price = get_total_price();
+		$("#total-price").text(get_readable_won(t_price));
+		$("#post-price").val(t_price);
+	});
+</script>
+
+<script src="{% static "nin2/nin2-buy.js" %}"></script>
+{% endblock %}
+

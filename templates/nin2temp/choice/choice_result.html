@@ -1,0 +1,47 @@
+{% extends "nlr_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<link href="{% static "nin2/nin2.css" %}" rel="stylesheet">
+
+<div class="row nin-head">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<img id="title-img" src="/media/img/choice/{{name}}/title_{{name}}_result.jpg" />
+		<hr class="tophr" ></hr>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+		<div class="nin-question">
+			<h3>
+				<span class="nin-question-sign glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+				<span>{{result.get_result}}</span>
+			</h3>
+		</div>
+	
+		<div style="margin-bottom: 12px;" class="nin-picture">
+			<img width="100%;" src="/media/img/choice/{{name}}/result_{{name}}_{{result.get_idx_str}}.jpg" />
+		</div>
+
+		<div style="margin-bottom: 12px;"class="nin-exlain panel panel-default">
+			<div class="panel-body">
+				{{result.get_explain}}
+			</div>
+		</div>
+		<a href="../../home/" style="margin-bottom: 12px;" type="button" class="btn btn-nin center-block">다시하기</a>
+	</div>
+</div>
+
+
+<div class="row text-center" style="padding-top: 10px;">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<a style="cursor:pointer;" onclick="twitter_share();"><img src="{% static "img/tw_sh_off.png" %}" onmouseover="this.src='{% static 'img/tw_sh_on.png' %}'" onmouseout="this.src='{% static 'img/tw_sh_off.png' %}'" width=200 /></a>
+		<div class="visible-xs" style="padding: 3px;"></div>
+		<a style="cursor:pointer;" onclick="facebook_share();"><img src="{% static "img/fb_sh_off.png" %}" onmouseover="this.src='{% static 'img/fb_sh_on.png' %}'" onmouseout="this.src='{% static 'img/fb_sh_off.png' %}'" width=200 /></a>
+	</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "nlr_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="/media/nin2/nin2.css" rel="stylesheet">
+
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+		<div class="nin-question">
+			<h3>
+				<span class="nin-question-sign glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				<span>{{problem.get_problem}}</span>
+			</h3>
+		</div>
+	
+		<div style="padding-bottom: 12px;" class="nin-picture">
+			<img width="100%;" src="/media/img/choice/{{name}}/question_{{name}}_{{problem.get_idx_str}}.jpg" />
+		</div>
+	
+		<div class="nin-exlain panel panel-default">
+			<div class="panel-body">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>
+			
+		<form method="POST">
+			{% csrf_token %}
+			
+			<div class="form-group">
+			<div style="width:100%;" class="btn-group btn-group-vertical" data-toggle="buttons">
+				{% for choice in problem.get_choice_list %}
+				<div style="white-space: normal;" class="btn btn-default btn-block">
+					<input type="radio" name="choice" id="option{{forloop.counter}}" value="c{{forloop.counter}}">
+					<span>{{choice}}</span>
+				</div>
+				{% endfor %}
+			</div>
+			
+			</div>
+			<div class="form-group">
+				<button id="btn-next"style="float: right;" type="submit" class="btn btn-nin">Next!</button>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		var clicked = false;
+		$("form").submit(function(){
+			if($(":radio[name='choice']:checked").length < 1){
+				alert("선택지를 골라주세요");
+				return false;
+			}
+			if(clicked == true){
+				return false;
+			}
+			clicked = true;
+		});
+	});
+
+	function position_to_middle(){
+		var proper_margin = window.innerHeight/2 - (1.1*$("#wraper4position").height())/2 - $("#custom-bootstrap-menu").height();
+		
+		$("#wraper4position").css("margin-top", proper_margin);
+	}
+	$(document).ready(function(){
+		position_to_middle();
+	});
+	$(window).resize(function(){
+		position_to_middle();	
+	});
+
+	$("form").click(function(){
+		$("html, body").stop().animate({
+			scrollTop: $("#btn-next").offset().top
+		});
+	});
+</script>
+
+{% endblock %}

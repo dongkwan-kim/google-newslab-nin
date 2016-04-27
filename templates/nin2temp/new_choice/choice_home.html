@@ -1,0 +1,58 @@
+{% extends "ma_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static "new_nin2/nin2.css" %}" rel="stylesheet">
+<style>
+	#set-6030{
+		text-align: right;
+		color: #ec423d;
+		cursor: pointer;
+		margin-top: -14px;
+	}
+</style>
+
+<div class="row nin-head">
+	<div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1">
+		<img id="title-img" src="/media/img/choice/{{name}}/title_{{name}}.png">
+		<img class="hide-on-small-only" height="65px" style="float: right;" src="{% static "img/choice/ninx2_char.png" %}">
+		<div class="divider"></div>
+		<p>{{home.get_explain}}</p>
+	</div>
+</div>
+
+<div class="row">
+	<form method="POST">
+		{% csrf_token %}
+		
+		<div class="col l4 offset-l4 m6 offset-m3 s12">
+		{% for inp in home.get_input %}
+			<div class="row">
+				<div class="input-field col s12">
+					<input type="{{inp.inputtype}}" id="{{inp.inputid}}" name="{{inp.name}}" placeholder="{{inp.placeholder}}" min="1" step="1" required>
+					<label for="{{inp.inputid}}">{{inp.label}}</label>
+				</div>
+			</div>
+		{% endfor %}
+			<p id="set-6030">
+				<i style="font-size: 17px;" class="material-icons">done</i>
+				최저 시급으로 설정하기
+			</p>
+		</div>
+
+		<div class="col l8 offset-l2 m10 offset-m1 s12">
+			<div class="row">
+				<button id="start-btn" class="btn btn-right waves-effect waves-light red" type="submit">
+					시작하기
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$("#set-6030").click(function(){
+		$("#won").val(6030);
+	});
+</script>
+
+{% endblock %}

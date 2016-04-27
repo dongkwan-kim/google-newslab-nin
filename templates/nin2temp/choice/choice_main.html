@@ -1,0 +1,65 @@
+{% extends "nlr_base.html" %}
+{% block content %}
+
+{% load staticfiles %}
+<link href="/media/nin2/nin2.css" rel="stylesheet">
+<style>
+
+
+</style>
+
+
+<div style="margin-top: 10px;" class="page-header col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+	<h1 style="color: #EE5023">
+		ninnin
+		<small style="font-size: 0.5em;" class="hidden-xs">닝닝은 전세계가 안전하게 사용하는 서비스입니다</small>
+		<a href="https://docs.google.com/spreadsheets/d/1j3PKA0RE0X1I1qOd66QiFTPt_jQz7cBWw16fY2ZwGWE/edit#gid=1030344902"><span class="badge">input format?</span></a>
+	</h1>
+
+</div>
+
+<div style="padding-left: 30px; padding-right: 30px;"
+	 class="col-md-5 col-md-offset-2 col-sm-6 col-sm-offset-1">
+	<a href="../albatype/home/" class="thumbnail">
+		<img style="width:100%;" src="/media/img/choice/thumbnail/thumbnail_main.jpg" />
+		<div class="caption">
+			<h3>알바할 때 어떠신지? <span style="background-color: #ef5121" class="badge">new!</span></h3>
+		</div>
+	</a>
+</div>
+
+<div style="padding-left: 0px; padding-right: 30px;"
+	 class="col-md-3 col-sm-4 hidden-xs">
+	
+	<a class="thumbnail">
+		<img style="width:100%;" src="/media/img/choice/thumbnail/thumbnail_main.jpg" />
+	</a>
+	<a class="thumbnail">
+		<img style="width:100%;" src="/media/img/choice/thumbnail/thumbnail_main.jpg" />
+	</a>
+
+</div>
+
+
+<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+	<div style="margin: 15px;">	
+	<hr class="tophr"></hr>
+	<h4>닝닝의 다른 콘텐츠</h4>
+	</div>
+	<div class="row">
+		
+		{% for emt in n2c %}
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<a href="../{{emt.n2c_path}}/home/" class="thumbnail">
+				<img src="/media/img/choice/thumbnail/thumbnail_{{emt.n2c_path}}.jpg" />
+				<div class="caption">
+					<p style="font-size: 110%;"><strong>{{emt.n2c_title}}</strong></p>
+					<p>{{emt.n2c_explain}}</p>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+		
+	</div>
+</div>
+{% endblock %}

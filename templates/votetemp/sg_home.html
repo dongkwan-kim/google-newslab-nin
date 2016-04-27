@@ -1,0 +1,142 @@
+{% extends "votetemp/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static "vote/sudogwon.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style>
+.a2a_default_style a {
+	padding: 0 10px;
+}
+.center-share-btn {
+	margin: 0 auto;
+	width: 336px;
+}
+</style>
+
+<div class="section no-pad-bot" id="index-banner">
+	<div class="container">
+    	<br><br>
+		<h1 class="header-title center han21-text">수도권 표심은 어디로?</h1>
+     	<div class="row center">
+        	<div class="col l8 offset-l2 m10 offset-m1 s12">
+				<p class="header-comment col s12 light">
+					최근 4차례 전국 선거에서<br>
+					유권자가 실제로 투표했던 결과를 분석한<br>
+					수도권 1126개 행정동의 표심을 보여드립니다
+				</p>
+			</div>
+		</div>
+      	<div class="row center">
+			<form method="POST">
+			{% csrf_token %}
+				<div class="input-field col l8 offset-l2 m10 offset-m1 s12">
+					<input name="reg" id="reg-or-adm" type="text" class="validate">
+					<label for="reg-or-adm">지역구/행정동을 입력해주세요</label>
+				</div>
+				<div class="col s12">
+					<button id="submit-btn" class="btn waves-effect waves-light" type="submit">찾기
+						<i class="material-icons right">search</i>
+					</button>
+				</div>
+			</form>
+		</div>
+      	<br><br>
+		<div class="center-share-btn a2a_kit a2a_kit_size_64 a2a_default_style" data-a2a-icon-color="#10B5B1">
+			<a style="padding-left:0px;" class="a2a_button_facebook"></a>
+			<a class="a2a_button_twitter"></a>
+			<a class="a2a_button_kakao"></a>
+			<a style="padding-right:0px;" class="a2a_button_line"></a>
+		</div>
+	</div>
+</div>
+
+<footer class="page-footer">
+	<div class="container">
+    	<div class="row">
+			<div class="col l6 s12">
+            	<h5 class="white-text">By Team Nin</h5>
+                <p class="grey-text text-lighten-4">
+					Google Newslab X 한겨레 21 = Nin<br>
+					구글 뉴스랩 펠로우쉽 졸업 이후에도 함께 갑니다?
+				</p>
+				<p class="grey-text text-lighten-4"><a style="color: white!important" href="https://www.facebook.com/yooktam/"><i style="font-size:15px;" class="material-icons">link</i> Facebook 페이지</a>에서 Team Nin의 다른 콘텐츠를 보실 수 있습니다</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+            	<h5 class="white-text">Links</h5>
+                <ul>
+                	<li><a class="grey-text text-lighten-3" href="http://newslabfellows.com/category/nin">Google NewsLab Fellowship</a></li>
+                	<li><a class="grey-text text-lighten-3" href="http://h21.hani.co.kr/">한겨레 21</a></li>
+                </ul>
+            </div>		
+		</div>
+	</div>
+    <div class="footer-copyright">
+    	<div class="container">
+        	© 2016 Copyright Nin
+        </div>
+    </div>
+</footer>
+<script>
+function is_mobile(){
+	var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson');
+	var is_mobile = false;
+	for (var word in mobileKeyWords){
+		if (navigator.userAgent.match(mobileKeyWords[word]) != null){
+			is_mobile = true;
+			break;
+		}
+	}
+	return is_mobile;
+}
+
+$(document).ready(function(){
+	// footer magin
+	var footer_top_margin = -40 + $(window).height() - $(".nav-min").height() - $("#index-banner").height();
+	$(".page-footer").css("margin-top", footer_top_margin);
+	
+	$("#submit-btn").click(function(){
+		alert("아래에 동의하셔야 결과를 무료로 볼 수 있습니다.\n\n"+
+				"선거 관계자라면, 깨끗한 정책 선거를 하겠습니다.\n"+
+				"유권자라면, 후보를 꼼꼼하게 따져 4월 13일에 꼭 투표하겠습니다.");
+	});
+	
+	if(is_mobile()){
+		$("input").click(function(){
+			$('html, body').stop().animate({
+				scrollTop : $('.input-field').offset().top-13,
+			});
+		});
+	}	
+
+	// autocomplete ajax
+	$("#reg-or-adm").autocomplete({
+		minLenth: 1,
+		source: function( request, response ) {
+			$.ajax({
+    			type: 'GET',
+       	 		data: {
+					"search_text": $("#reg-or-adm").val()
+				},
+        		success: function(data) {
+        			response( 
+            			$.map(JSON.parse(data), function(item) {
+                			return {
+                    			value: item["text"],
+                        		label: item["text"],
+                    		}
+                		})
+            		);
+        		}
+    		});
+    	},
+		select: function(event, ui){
+			console.log("asdf");
+		}
+	});	
+});
+</script>
+
+<script async src="//static.addtoany.com/menu/page.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}

@@ -1,0 +1,160 @@
+hr.tophr{
+	border-color: #a3a3a3;
+}
+
+hr.ourhr{
+	border-color: #d3d3d3;
+}
+
+#value-input .slider-selection {
+	background: #E7886C;
+}
+#value-input .slider-handle {
+	background: #EF5122;
+}
+
+.view-specvalue{
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #d3d3d3;
+	padding-bottom: 10px;
+	font-size: 15px;
+}
+
+.nin-head{
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+#title-img{
+	height: 50px;
+}
+
+@media (max-width: 767px) 
+{
+	.rcol-with-footer {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		padding: 0;
+		height: 90px;
+		z-index: 10;
+	}
+
+	.panel-nin > .panel-heading {
+		-webkit-border-radius: 0px !important;
+	}
+}
+
+.panel-nin {
+	margin-bottom: 10px;
+}
+
+.panel-nin > .panel-heading {
+	background-color: #ef5122;
+	color: white;
+	height: 60px;
+	-webkit-border-radius: 9px;
+}
+
+.panel-left-body {
+	padding-bottom: 7px;
+	padding-top: 7px;
+}
+
+.nin-panel-title {
+	font-size: 30px;
+	vertical-align: middle;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.glyphicon-nin {
+	color: #ef5122;
+	float: right;
+	cursor: pointer;
+}
+
+.nin-question-sign {
+	color: #ef5122;
+}
+
+.btn-nin {
+	color: #fff;
+	background-color: #ef5122;
+	border-color: #FF3A00;
+}
+
+.btn-nin:hover {
+	color: #fff;
+	background-color: #B82A00;
+	border-color: #BA2A00;
+}
+
+.btn-nin:active, .btn-nin:focus {
+	color: #fff;
+	background-color: #B82A00;
+	border-color: #BA2A00;
+}
+
+.btn-nin-inv {
+	color: #ef5122;
+	background-color: #fff;
+	border-color: #fff;
+}
+
+.btn-nin-inv:hover {
+	color: #ef5122;
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+}
+
+.btn-nin-inv:active, .btn-nin-inv:focus {
+	color: #ef5122;
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+}
+
+.label-nin {
+	background-color: #ef5122;
+}
+
+.thumbnail-nin:hover, .thumbnail-nin:active{
+	text-decoration: none;	
+}
+
+.thumbnail-active{
+	background-color: #EF5121;
+	color: #fff;
+}
+
+.thumbnail-nin:focus, .thumbnail-nin:hover{
+	border-color: #EF5121;
+}
+
+.thumbnail-sum-view {
+	cursor:auto!important;
+	background-color: #fff!important;
+}
+
+.extra-cond{
+	margin: 3px 0px;
+}
+
+.alert-fixed {
+	display: none;
+	position: fixed;
+	top: 170px;
+	left: 50%;
+	width: 400px;
+	margin-left: -200px;
+	z-index: 10;
+}
+
+.rcol-top-text {
+	margin: 0px;
+	padding: 5px 0px;
+	background-color: white;
+	color: #ef5122;
+	font-weight: 700
+}

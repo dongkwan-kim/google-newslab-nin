@@ -1,0 +1,37 @@
+{% extends "votetemp/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static "vote/sudogwon.css" %}" rel="stylesheet">
+
+<div class="section no-pad-bot" id="index-banner">
+	<div class="container">
+    	<br><br>
+		<h1 class="header-title center han21-text">{{big_msg}}</h1>
+     	<div class="row center">
+        	<div class="col l8 offset-l2 m10 offset-m1 s12">
+				<p class="header-comment col s12 light">
+					{{small_msg}}
+				</p>
+			</div>
+		</div>
+		<div class="collection">
+			{% for reg in regs_list %}
+			{% if reg.admin_region == "avg"%}
+        	<a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} 전체평균</a>
+			{% else %}
+        	<a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} {{reg.admin_region}}</a>
+			{% endif %}
+			{% endfor %}
+      	</div>		
+		<div class="row center">
+			<a href="/sudogwon413/" class="btn waves-effect waves-light" type="submit">되돌아가기
+				<i class="material-icons right">refresh</i>
+			</a>
+		</div>
+      	<br><br>
+	</div>
+</div>
+
+
+{% endblock %}

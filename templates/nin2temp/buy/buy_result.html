@@ -1,0 +1,84 @@
+{% extends "nlr_base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+<style>
+	
+	.progress-nin {
+		margin-top: 13px;
+	}
+
+	.progress-bar-nin {
+		background-color: #EF5122;
+		-webkit-transition: width 3s linear;
+		-moz-transition: width 3s linear;
+		-ms-transition: width 3s linear;
+		-o-transition: width 3s linear;
+		transition: width 3s linear;
+	}
+
+</style>
+
+<link href="{% static "nin2/nin2.css" %}" rel="stylesheet">
+<div style="margin:10px;"></div>
+
+<div class="row nin-head">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<img id="title-img" src="{% static "img/buy/title_buy.jpg" %}">
+		<hr class="tophr" ></hr>
+	</div>
+</div>
+
+<div class="row">
+	<h2 style="text-align: center; margin-bottom: 30px;">
+		<span id="price-view"></span>을 벌기 위해 필요한 시간은?
+	</h2>
+	
+</div>
+
+{% for cp in cp_list %}	
+<div class="row">
+
+	<div class="col-md-1 col-md-offset-2 col-sm-2 col-sm-offset-1">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				{{cp.get_country_name}}
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-1 col-sm-2">
+		<span id="time-{{forloop.counter}}">0</span>
+	</div>
+
+	<div class="col-md-6 col-sm-6">
+		<div class="progress progress-striped active progress-nin">
+		    <div id="pay-{{forloop.counter}}" class="progress-bar progress-bar-nin" role="progressbar" data-transitiongoal="100"></div>
+		</div>
+		<script>
+			var $pb_{{forloop.counter}} = $("#pay-{{forloop.counter}}");
+			$(document).ready(function() {
+				$new_pb = $pb_{{forloop.counter}}.css("transition-duration", {{cp.get_op_time}}+"s");
+				$new_pb.attr("data-transitiongoal", "{{cp.get_tg_percent}}");
+				$new_pb.progressbar({
+					update: function(percent) {
+						$("#time-{{forloop.counter}}").html(get_readable_hour({{price}}*(percent/100)*{{cp.get_exp_time_const}}));
+					},
+				});
+			});
+		</script>
+	</div>
+</div>
+{% endfor %}
+
+<script>
+	$(document).ready(function(){
+		$("#price-view").text(get_readable_won({{price}}));
+	});
+</script>
+
+
+<script src="{% static "nin2/nin2-buy.js" %}"></script>
+<script src="{% static "bootstrap-progressbar.min.js" %}"></script>
+{% endblock %}
+

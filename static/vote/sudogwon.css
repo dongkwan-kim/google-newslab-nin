@@ -1,0 +1,47 @@
+.han21-text{
+	color: #10B5B1;
+}
+footer.page-footer {
+	margin-top: 180px;
+	background-color: #10B5B1;
+}
+.strong-party-panel{
+	font-size: 20px;		
+}
+.header-comment {
+	font-size: 1.2rem;
+}
+
+.ui-autocomplete {
+	max-height: 150px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+#other-ar-input {
+	margin-right:20px;
+	width:40%;
+}
+.a2a_floating_style {
+	background-color: transparent!important;
+}
+
+@media (max-width: 992px){
+	.header-title {
+		font-size: 3.5rem;
+	}
+}
+
+@media (max-width: 600px){
+	.header-title {
+		font-size: 2.4rem;
+	}
+	.header-comment {
+		font-size: 0.95rem;
+	}
+	.strong-party-panel{
+		font-size: 15px;		
+	}
+}
+
+

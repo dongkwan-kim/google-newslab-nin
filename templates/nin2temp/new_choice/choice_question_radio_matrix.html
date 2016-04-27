@@ -1,0 +1,48 @@
+{% extends "nlr_ma_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<link href="{% static "new_nin2/nin2.css" %}" rel="stylesheet">
+
+<div style="margin-top: 30px;" class="row">
+	<div class="col l6 offset-l3 m8 offset-m2 s12">
+		<div class="nin-question">
+			<h4 style="font-size: 24px;">
+				<i class="material-icons red-icons">question_answer</i>
+				<span>{{problem.get_problem}}</span>
+			</h4>	
+		</div>
+		<div class="card">
+			<div class="card-content">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>
+	
+		<form method="POST">
+		{% csrf_token %}
+			{% for prev_choice in prev_choice_list %}		
+			<div class="row">
+				<div class="input-field col s12">
+    				<select name="choice{{forloop.counter}}">
+      					<option value="" disabled selected>며칠?</option>
+ 						{% for choice in problem.get_choice_list %}
+						{% for radio in choice.radio_list %}
+						<option value="c{{forloop.counter}}">{{radio}}</option>
+						{% endfor %}
+						{% endfor %}
+    				</select>
+    				<label>{{prev_choice.label}}</label>
+				</div>
+			</div>
+			{% endfor %}
+			<button id="btn-next" class="btn btn-right waves-effect waves-light red" type="submit">
+				Next!
+			</button>
+		</form>
+
+	</div>
+</div>
+
+
+{% endblock %}

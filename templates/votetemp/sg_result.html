@@ -1,0 +1,327 @@
+{% extends "votetemp/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static "vote/sudogwon.css" %}" rel="stylesheet">
+<div class="container">
+	<div class="row">
+    	<div class="col s12 center">
+        	<br><br>
+			<div style="padding:10px; background-color:{{pc}}" class="card-panel strong-party-panel white-text">
+				<span class="center">{{vr_msg}}은 <br class="hide-on-med-and-up"> {{wr}}</span>
+			</div>
+		</div>
+		<div class="col m6 s12">
+			<div id="avg-chart" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+		</div>
+		<div class="col m6 s12">
+			<div id="trg-chart" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col m5 offset-m5 s10 input-field">
+			<select id="other-ar-select">
+	         	<option value="" disabled selected>행정동을 선택해주세요</option>
+                {% for ar in oal %}
+                {% if ar.admin_region == "avg" %}
+                <option value={{ar.region_id}}>전체평균</option>
+                {% else %}
+                <option value={{ar.region_id}}>{{ar.admin_region}}</option>
+                {% endif %}
+            	{% endfor %}
+            </select>
+        	<label><span class="ed-without-p">{{vr.election_district}}</span>의 다른 행정동 보기</label>
+		</div>
+        <a id="other-ar-btn" style="margin-top:20px;" class="col m2 s2 waves-effect waves-light btn">GO!</a>
+	</div>
+	
+	<div class="row" style="margin-bottom:10px;">
+		<ul class="collapsible" data-collapsible="accordion">
+			<li>
+				<div class="collapsible-header"><i class="material-icons">touch_app</i>어떤 자료인가요?</div>
+				<div class="collapsible-body">
+					<p>
+						<한겨레21>은 데이터분석기관인 ‘빅토리랩(여론데이터분석센터장 최정묵)’과 함께 최근 7년간 치러진 전국 단위 4개 선거에서 나타난 수도권 유권자의 표심을 분석했다. 수도권 122개 지역구에 있는 1126개 행정동(읍·면 포함) 표심을 모두 조사했다.
+					<br><br>
+						제5회 지방선거(2010년), 제19대 총선·제18대 대통령선거(2012년), 제6회 지방선거(2014년)를 조사 대상 선거로 삼았다. 이들 선거에 모두 후보를 낸 새누리당과 더불어민주당 중심으로 유권자의 투표 성향을 살폈다. 지방선거는 시·도지사 선거 결과만 사용했다.
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">touch_app</i>평균, 적극, 소극의 의미는?</div>
+				<div class="collapsible-body">
+					<p>
+						새누리(더민주) 평균’(①)은 최근 4개 선거에서 그 지역의 새누리당과 더불어민주당 후보가 얻은 득표율의 평균값이다.
+					<br><br>
+						새누리(더민주) 적극’(②)은 해당 정당의 후보가 해당 지역에서 가장 적게 얻었던 득표율이다. 어떤 경우에도 그 정당을 찍을 가능성이 높은 적극 지지층의 비율을 뜻한다.
+					<br><br>
+						새누리(더민주) 소극’은 최근 4개 선거에서 그 지역의 새누리당과 더불어민주당 후보가 얻은 득표율의 평균값(①)에서 적극지지층으로부터 얻은 득표율(②)을 뺀 값이다. 이들은 그 정당을 지지하긴 하지만 인물·공약·선거구도가 마음에 들지 않으면 투표를 포기하는 소극지지층이다. 
+					<br><br>
+						'무소속·제3당’은 최근 4개 선거에서 무소속·군소정당·진보정당이 얻은 득표율의 평균값을 뜻한다.
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">touch_app</i>타깃의 의미는?</div>
+				<div class="collapsible-body">
+					<p>
+						‘새누리(더민주) 타깃’은 그 지역에서 각 정당의 후보가 ‘소극지지층으로부터 얻은 득표율’과 ‘무소속·제3당’이 얻은 득표율을 더한 값이다. 새누리와 더불어민주당이 득표의 확장을 위해 끌어당겨야 하는 유권자의 비율을 뜻한다.
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">touch_app</i>분석의 한계는?</div>
+				<div class="collapsible-body">
+					<p>
+						2012년 총선에서 야권연대가 이뤄져 당시 더불어민주당 후보가 출마하지 않은 7곳(서울 관악을·노원병·은평을, 인천 남구갑, 경기도 안산 단원갑·고양갑·성남중원구)은 분석 데이터가 부족했던 한계가 있다.
+					</p>
+				</div>
+			</li>
+
+			<li>
+				<a style="color:#10B5B1" href="http://h21.hani.co.kr/arti/cover/cover_general/41456.html" class="collapsible-header"><i class="material-icons">add_circle_outline</i>더 알고 싶다면?</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="row">
+		<div class="col s12" style="padding:0px;">
+			<ul class="collection with-header z-depth-1">
+        		<li class="collection-header"><span style="font-size:17px;">이 지역 2016 총선 후보는?</span></li>
+				{% for cand in cl %}
+				<li class="collection-item avatar">
+      				<i class="circle" style="background-color:{{cand.cand_party_color}}">{{cand.cand_number}}</i>
+      				<span class="title">{{cand.cand_name}}</span>
+      				<p>{{cand.cand_profile}}</p>
+      				<a href="http://info.nec.go.kr/electioninfo/candidate_detail_info.xhtml?electionId=0020160413&huboId={{cand.cand_id}}" class="secondary-content"><i class="material-icons">search</i></a>
+   	 			</li>	
+				{% endfor %}
+			</ul>		
+		</div>
+	</div>
+</div>
+
+
+<!-- share -->
+<div class="hide-on-small-only a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" data-a2a-icon-color="#10B5B1" style="left:0px; top:110px;">
+    <a class="a2a_button_facebook"></a>
+	<a class="a2a_button_twitter"></a>
+	<a class="a2a_button_kakao"></a>
+	<a class="a2a_button_line"></a>
+</div>
+<div class="hide-on-med-and-up a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style" data-a2a-icon-color="#10B5B1" style="bottom:0px; right:0px;">
+    <a class="a2a_button_facebook"></a>
+	<a class="a2a_button_twitter"></a>
+	<a class="a2a_button_kakao"></a>
+	<a class="a2a_button_line"></a>
+</div>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script async src="//static.addtoany.com/menu/page.js"></script>
+
+<script>
+$(function () {
+	$(".ed-without-p").text("{{vr.election_district}}".split("(")[0]);
+	
+	//select
+	$('select').material_select();
+	$("#other-ar-btn").click(function(){
+		var val = $("#other-ar-select").val();
+		if(val != null){
+			location.href = "/sudogwon413/"+val;
+		}
+	});
+
+	//chart
+	Highcharts.theme = {
+	   colors: ["#F44336", "#007CB8", "#A3A3A3"]
+	}
+	Highcharts.setOptions(Highcharts.theme);
+
+    $('#avg-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+		title: {
+            text: null
+        },
+        subtitle: {
+            text: "클릭하시면 적극/소극 지지층을 보실 수 있습니다",
+			style: {
+				fontWeight: "900"
+			}
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+			title: {
+				text: null
+			},
+		},
+		legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">정당 지지율</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+        },
+        series: [{
+            name: 'before',
+            colorByPoint: true,
+            data: [{
+                name: '새누리 평균',
+                y: {{vr.sanuri_avg}},
+                drilldown: 'sanuri'
+            }, {
+                name: '더민주 평균',
+                y: {{vr.minju_avg}},
+                drilldown: 'minju'
+            }, {
+                name: '무소속/제3당',
+                y: {{vr.third_val}},
+                drilldown: null
+            }]
+        }],
+        drilldown: {
+			drillUpButton: {
+                relativeTo: 'spacingBox',
+                position: {
+                    y: 0,
+                    x: 0
+				}
+			},
+			series: [{
+                name: '새누리 적극/소극',
+                id: 'sanuri',
+                data: [
+                    [
+                        '적극',
+                        {{vr.sanuri_act}}
+                    ],
+                    [
+                        '소극',
+                        {{vr.sanuri_pas}}
+                    ]
+                ]
+            }, {
+                name: '더민주 적극/소극',
+                id: 'minju',
+                data: [
+                    [
+                        '적극',
+                        {{vr.minju_act}}
+                    ],
+					[
+						'소극',
+						{{vr.minju_pas}}
+					]
+                ]
+            }]
+        }
+    });
+	
+	$('#trg-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+		title: {
+            text: null
+        },
+        subtitle: {
+            text: "클릭하시면 각 정당 타깃 구성을 볼 수 있습니다",
+			style: {
+				fontWeight: "900"
+			}
+		},
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+			title: {
+				text: null
+			},
+		},
+		legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">정당 지지율</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+        },
+
+        series: [{
+            name: 'before',
+            colorByPoint: true,
+            data: [{
+                name: '새누리 타깃',
+                y: {{vr.sanuri_trg}},
+                drilldown: 'sanuri'
+            }, {
+                name: '더민주 타깃',
+                y: {{vr.minju_trg}},
+                drilldown: 'minju'
+            }]
+        }],
+        drilldown: {
+            drillUpButton: {
+                relativeTo: 'spacingBox',
+                position: {
+                    y: 0,
+                    x: 0
+				}
+			},
+			series: [{
+                name: '새누리 소극/무소속제3당',
+                id: 'sanuri',
+                data: [
+                    [
+                        '소극',
+                        {{vr.sanuri_pas}}
+                    ],
+                    [
+                        '무소속/제3당',
+                        {{vr.third_val}}
+                    ]
+                ]
+            }, {
+                name: '더민주 소극/무소속제3당',
+                id: 'minju',
+                data: [
+                    [
+                        '소극',
+                        {{vr.minju_pas}}
+                    ],
+					[
+						'무소속/제3당',
+						{{vr.third_val}}
+					]
+                ]
+            }]
+        }
+    });
+});
+</script>
+
+{% endblock %}

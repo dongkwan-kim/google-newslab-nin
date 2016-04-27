@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+$(document).ready(function() {
+	$('[data-toggle="popover"]').popover();
+});
+
+</script>
+
+{% load staticfiles %}
+<link href="{% static "nin2/nin2.css" %}" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.5/css/bootstrap-slider.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.5/bootstrap-slider.min.js"></script>
+
+<div class="row nin-head">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<img id="title-img" src="{% static "img/calc/title_calc.jpg" %}">
+		<hr class="tophr" ></hr>
+		<h3>당신이 파는 당신의 몸,</h3>
+		<p>그 값은 제대로 챙겨받고 계십니까?</p>
+	</div>
+</div>
+
+<div class="row" >
+	
+	<!-- left col. -->
+	<div class="col-md-5 col-md-offset-2 col-sm-6 col-sm-offset-1">
+		<!-- hourly wage panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>시급 </strong>
+					<a style="cursor:pointer" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="top" title="올해의 최저시급은?" data-content="6060원 이라고 합니다! 쓸데 없는 내용을 채워 넣겠습니다. 나랏말쌈이 듕귁에 달아 문짜와로 서르 사맛디 아니할쎄 이런 전차로 어륀 뵉셩이 니르고져 홇빼이셔도">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a>
+				</h3>
+			</div>
+
+			<div class="panel-body">
+				<h4 class="text-center col-md-5 col-sm-6 view-specvalue">
+					<span id="view-seegeup">시급</span>
+					<span id="refr-seegeup" class="glyphicon-nin glyphicon glyphicon-refresh" aria-hidden="true"></span>
+				</h4>
+
+				<div class="col-md-7 col-sm-6">
+					<input style="width: 100%;" id="seegeup" data-slider-id="value-input" data-slider-handle='square' type="text" data-slider-min="0" data-slider-max="20000" data-slider-step="100" data-slider-value="6030" data-slider-tooltip="hide"/>
+					<script>
+					var slider_sg = $('#seegeup').slider();
+					$('#refr-seegeup').click(function() {
+						slider_sg.slider("setValue", 6030);
+						$(".slider-horizontal").trigger('click');
+					});
+					</script>
+				</div>
+			</div>
+		</div>
+		
+		<!-- time range panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>업무 시간</strong>
+					<a style="cursor:pointer" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="top" title="몇 시간 일하시나요?" data-content="일주일 최장 근로 시간은 52시간이라고 합니다 쓸데 없는 내용을 채워 넣겠습니다. 나랏말쌈이 듕귁에 달아 문짜와로 서르 사맛디 아니할쎄 이런 전차로 어륀 뵉셩이 니르고져 홇빼이셔도">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a>
+				</h3>
+			</div>
+			<div class="panel-body">
+
+				<h4 class="text-center col-md-5 col-sm-6 view-specvalue">
+					<span id="view-timerange">업무 시간</span>
+					<span id="chan-timerange" class="glyphicon-nin glyphicon glyphicon-transfer" aria-hidden="true"></span>
+				</h4>
+
+				<div class="col-md-7 col-sm-6">
+					<input style="width: 100%;" id="timerange" data-slider-id="value-input" data-slider-handle='square' type="text" data-slider-min="0" data-slider-max="24" data-slider-step="1" data-slider-value="[10, 19]" data-slider-tooltip="hide"/>
+					<script>
+					var slider_tr = $('#timerange').slider();
+					</script>
+				</div>
+			</div>
+		</div>
+		
+		<!-- date panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>업무 요일</strong>
+					<a style="cursor:pointer" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="top" title="주말에 일하신다면?" data-content="주말 수당을 받으셔야 해요.  쓸데 없는 내용을 채워 넣겠습니다. 나랏말쌈이 듕귁에 달아 문짜와로 서르 사맛디 아니할쎄 이런 전차로 어륀 뵉셩이 니르고져 홇빼이셔도">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</a>
+				</h3>
+			</div>
+			<div class="panel-body text-center">
+				<div class="btn-group btn-group-justified" data-toggle="buttons">
+					<label class="btn btn-week btn-default active">월</label>
+					<label class="btn btn-week btn-default">화</label>
+					<label class="btn btn-week btn-default active">수</label>
+					<label class="btn btn-week btn-default">목</label>
+					<label class="btn btn-week btn-default">금</label>
+					<label class="btn btn-week btn-weekends btn-default">토</label>
+					<label class="btn btn-week btn-weekends btn-default active">일</label>
+				</div>
+			</div>
+		</div>
+	
+		<!-- extra cond. panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>기타 조건</strong>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div style="margin: 0px;" class="checkbox">
+					<label style="margin: 3px 0px;">
+						<input class="extra-cond" type="checkbox"> 보험을 들었나요?
+					</label>
+					<br/>
+					<label style="margin: 3px 0px;">
+						<input class="extra-cond" type="checkbox"> 그곳에서 일하는 사람이 5명 미만이었나요?
+					</label>
+				</div>
+			</div>
+		</div>
+	</div><!-- end of left col.-->
+
+	<!-- right col. -->
+	<div class="text-center col-md-3 col-sm-4 rcol-with-footer">
+		<p class="rcol-top-text">
+			<span style="cursor: pointer; color: #E4E4E4;" class="glyphicon glyphicon-chevron-left date-mover" aria-hidden="true"></span>
+			<span id="year-month"></span> 당신의 육값은
+			<span style="cursor: pointer; color: #E4E4E4;"class="glyphicon glyphicon-chevron-right date-mover" aria-hidden="true"></span>
+		</p>
+		<div class="panel panel-nin">
+			<div class="panel-heading">
+				<span class="nin-panel-title" id="result">Loading...</span>
+				<span onclick="scroll_to_table();" style="float:right; font-size:25px;" class="visible-xs glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+				<script>
+				function scroll_to_table(){
+					$('html, body').stop().animate({
+						scrollTop : $('.table').offset().top-window.innerHeight/2+$('.table').height()/2,
+					});
+				}
+				</script>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center col-md-3 col-sm-4">
+		<p style="margin-top: 10px; font-size: 75%; font-weight: 600;">
+			클릭하면 산출 근거를 보실 수 있습니다
+		</p>
+		<table style="cursor:pointer;" class="table table-hover">
+			<tbody>
+				<tr class="m-row" data-toggle="modal" data-target="#modal-dt-wd">
+					<td>주간/주중</td>
+					<td id="dt-wd"></td>
+				</tr>
+				<tr class="m-row" data-toggle="modal" data-target="#modal-dt-we">
+					<td>주간/주말</td>
+					<td id="dt-we"></td>
+				</tr>
+				<tr class="m-row" data-toggle="modal" data-target="#modal-nt-wd">
+					<td>야간/주중</td>
+					<td id="nt-wd"></td>
+				</tr>
+				<tr class="m-row" data-toggle="modal" data-target="#modal-nt-we">
+					<td>야간/주말</td>
+					<td id="nt-we"></td>
+				</tr>
+				<tr class="m-row" data-toggle="modal" data-target="#modal-wkhol">
+					<td>주휴 수당</td>
+					<td id="wkhol">구현 예정</td>
+				</tr>
+			</tbody>
+		</table>
+	</div><!-- end of right col. -->
+</div><!-- end of content row -->
+
+<!-- Share -->
+<div class="row text-center" style="padding: 30px 0px;">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<a href="#" onclick="twitter_share();"><img src="{% static "img/tw_sh_off.png" %}" onmouseover="this.src='{% static 'img/tw_sh_on.png' %}'" onmouseout="this.src='{% static 'img/tw_sh_off.png' %}'" width=200 /></a>
+		<div class="visible-xs" style="padding: 3px;"></div>
+		<a href="#" onclick="facebook_share();"><img src="{% static "img/fb_sh_off.png" %}" onmouseover="this.src='{% static 'img/fb_sh_on.png' %}'" onmouseout="this.src='{% static 'img/fb_sh_off.png' %}'" width=200 /></a>
+	</div>
+</div>
+
+<script src="{% static "nin2/nin2-calc.js" %}"></script>
+
+<!-- Modal -->
+{% for mobj in modals %}
+<div class="modal" id="{{mobj.modal_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{{mobj.modal_title}}</h4>
+			</div>
+			<div class="modal-body">
+				{% if mobj.modal_name != "주휴수당" %}
+				<p>{{mobj.modal_name}}에는 <span id="{{mobj.modal_id}}-day"></span>일 동안 <span id="{{mobj.modal_id}}-hour"></span>시간 일하셨습니다.</p>
+				{% else %}
+				<p>주휴 수당에 대한 설명</p>
+				{% endif %}
+				<p>{{mobj.modal_body}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+<script>
+
+</script>
+{% endblock %}

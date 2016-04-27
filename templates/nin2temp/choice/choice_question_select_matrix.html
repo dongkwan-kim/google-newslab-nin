@@ -1,0 +1,70 @@
+{% extends "nlr_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<style>
+@media (max-width: 767px) {
+	.panel-left {
+		margin-bottom: 3px;
+	}
+}
+</style>
+
+<link href="/media/nin2/nin2.css" rel="stylesheet">
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<div class="nin-question">
+			<h3>
+				<span class="nin-question-sign glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				<span>{{problem.get_problem}}</span>
+			</h3>
+		</div>
+		<div class="nin-exlain panel panel-default">
+			<div class="panel-body">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<form method="POST">
+		{% csrf_token %}
+		{% for prev_choice in prev_choice_list %}		
+			<div class="row">
+				<div class="col-md-7 col-sm-6">
+					<div class="panel panel-default panel-left">
+						<div class="panel-body panel-left-body">
+							<span>
+								{{prev_choice.label}}	
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5 col-sm-6">
+					<div class="form-group">
+						<select name="choice{{forloop.counter}}" class="form-control">
+						{% for choice in problem.get_choice_list %}
+						{% for select in choice.select_list %}
+							<option value="c{{forloop.counter}}">{{select}}</option>
+						{% endfor %}
+						{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+			<div style="padding-right: 15px;" class="form-group">
+				<button id="btn-next"style="float: right;" type="submit" class="btn btn-nin">Next!</button>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+
+{% endblock %}

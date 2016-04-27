@@ -1,0 +1,5 @@
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+html{
+	font-family: nanumbarungothic!important;
+}

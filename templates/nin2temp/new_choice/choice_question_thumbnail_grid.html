@@ -1,0 +1,86 @@
+{% extends "nlr_ma_base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<link href="{% static "new_nin2/nin2.css" %}" rel="stylesheet">
+<link href="{% static "new_nin2/nin2tg.css" %}" rel="stylesheet">
+
+<div style="margin-top: 30px;" class="row">
+	<div class="col l6 offset-l3 m8 offset-m2 s12">
+		<div class="nin-question">
+			<h4 style="font-size: 24px;">
+				<i class="material-icons red-icons">question_answer</i>
+				<span>{{problem.get_problem}}</span>
+			</h4>	
+		</div>
+		<div style="margin-left: 11.250px; margin-right: 11.250px;" class="card">
+			<div class="card-content">
+				<span style="font-size:16px;">{{problem.get_explain}}</span>
+			</div>
+		</div>	
+		<form method="POST">
+		{% csrf_token %}
+		<div class="row card-list">
+			{% for choice in problem.get_choice_list %}
+			{% if choice.label == "dummy" %}
+			<div style="visibility: hidden;" class="{{choice.explain}} col l4 m6 s6 card-emt"></div>
+			{% else %}
+			<div class="col l4 m6 s6 card-emt">
+          		<div class="card">
+            		<div class="card-image">
+						<!--
+						<img src="/media/img/choice/{{name}}/{{name}}{{forloop.counter}}.jpg" />
+						-->
+						<img src="/media/img/choice/europe/europe{{forloop.counter}}.jpg" />
+            		</div>
+            		<div class="card-content">
+              			<span class="card-title">{{choice.label}}</span>
+						<p>{{choice.explain}}</p>
+            		</div>
+            		<div class="card-action right-align">
+            			<input type="checkbox" class="filled-in" id="c{{forloop.counter}}" value="c{{forloop.counter}}" name="choice1"/>
+						<label for="c{{forloop.counter}}">{{choice.ment}}</label>
+					</div>
+          		</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<button id="btn-next" class="btn btn-right waves-effect waves-light red" type="submit">
+					Next!
+				</button>
+			</div>
+		</div>
+		<input type="hidden" name="pidx" value={{problem.idx}}>
+	</form>
+</div>
+
+
+<script>
+	$("input.filled-in").click(function (){
+		// scroll
+		$("html, body").stop().animate({
+			scrollTop: $(this).offset().top - 300
+		});
+	});
+	
+	$("#btn-next").click(function(){
+		var $cb_list = $("input");
+		var is_there_any_checked = false;
+		for(var idx = 0; idx < $cb_list.length; idx++ ){
+			if($cb_list[idx].checked == true){
+				is_there_any_checked = true;
+				break;
+			}
+		}
+		if(!is_there_any_checked){
+			alert("하나라도 여행가주세요ㅠ");
+			return false;
+		}
+	});
+</script>
+
+{% endblock %}

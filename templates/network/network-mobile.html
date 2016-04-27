@@ -1,0 +1,590 @@
+<!doctype html>
+<html>
+<head>
+	<title>알바의 언어</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<meta property="og:title" content="{{meta.meta_title}}"/>
+	<meta property="og:type" content="{{meta.meta_type}}"/>
+	<meta property="og:url" content="{{meta.meta_url}}"/>
+	<meta property="og:description" content="{{meta.meta_description}}"/>
+	<meta property="og:image" content="{{meta.meta_image}}"/>
+	{% load staticfiles %}
+	<link href="{% static "new_nin2/font.css" %}" rel="stylesheet">
+	<style type="text/css">
+
+	#mynetwork {
+		width: 100%;
+		height: 400px;
+		margin: auto;
+		display: inline-block;
+	/*	border: 1px solid red;*/
+	}	
+	
+	.modal.bottom-sheet {
+		max-height: 90%!important;
+	}	
+
+	@media (max-width: 767px){
+	}
+
+	#see-article {
+		position: fixed;
+		margin: 10px;
+		left: 0px;
+		bottom: 0px;
+	}
+
+	#open-new-btn{
+		position:fixed;
+		margin: 10px;
+		bottom:0px;
+		right:0px;
+	}
+	.collapsible-header{
+		background-color: #F5F5F5!important;
+	}
+
+	.collapsible-body{
+		background-color: #fff;
+	}
+
+	.chip-collection{
+		cursor: pointer;
+	}
+	
+	.collection a.collection-item{
+		color: #010101!important;
+	}
+	
+	.active-collection-item {
+		background-color: #E69C99!important;
+	}
+	
+	.active-collection-item > i {
+		color: #ffffff;
+	}
+
+	a.link {
+		color: #ec423d;
+	}
+	.not-imp-btn{
+		background-color: #8D827A!important;
+	}
+	.a2a_kit{
+		background-color: transparent!important;
+	}
+	</style>
+
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.14.0/vis.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.14.0/vis.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" rel="stylesheet" >
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+	<script>
+	/*
+	function is_mobile(){
+		var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson');
+		var is_mobile = false;
+		for (var word in mobileKeyWords){
+			if (navigator.userAgent.match(mobileKeyWords[word]) != null){
+				is_mobile = true;
+				break;
+			}
+		}
+		return is_mobile;
+	}
+	*/
+	$(document).ready(function(){
+		$(".modal-trigger").leanModal();
+	});
+	</script>
+
+	<script type="text/javascript">
+	var nodes = null;
+	var edges = null;
+	var network = null;
+
+	var nodes = [];
+	var edges = [];
+	
+	{% for n in nodes %}nodes.push({{n|safe}});{% endfor %}
+	{% for e in edges %}edges.push({{e|safe}});{% endfor %}
+	
+	console.log(nodes.length + " / "+edges.length)
+	var node_id_list_for_ajax = [];
+	update_node_id_list_for_ajax();
+	
+	var offsetx = 0;
+	var offsety = 0;
+	var duration = 500;
+	var scale = 2;
+	var positionx = 30;
+	var positiony = 30;
+	var easingFunction = "easeInOutQuad";
+
+	function update_node_id_list_for_ajax(){
+		node_id_list_for_ajax = [];
+		// node_id_list_for_ajax is global variable;
+		for(var idx = 0; idx < nodes.length; idx++){
+			node_id_list_for_ajax.push(nodes[idx]["id"]);
+		}
+	}
+
+	function focus_on_node(node_id){
+		var options = {
+			scale: scale,
+			offset: {x:offsetx,y:offsety},
+			animation: {
+				duration: duration,
+				easingFunction: easingFunction
+			}
+		};
+		network.focus(node_id, options);
+	}
+
+	function fit_animate(){
+		var options = {
+			offset: {x:offsetx, y:offsety},
+			duration: duration,
+			easingFunction: easingFunction,
+		};
+		network.fit({animation:options});
+	}
+
+	function resize_canvas_w(rc_shown){
+		if(rc_shown == true){
+			$("#mynetwork").css("width", "70%");
+		} else {
+			$("#mynetwork").css("width", "100%");
+		}
+	}
+
+	function resize_h(){
+		console.log($(window).width() +" / "+ $(window).height());
+		console.log($(document).width() +" / "+ $(document).height());
+		var b_height = $(window).height();
+		$("#mynetwork").css("height", b_height);
+	}
+
+	function find_edge_by_id(edge_id){
+		for(var idx = 0; idx < edges.length; idx++){
+			s_edge = edges[idx];
+			if(s_edge["id"] == edge_id){
+				return s_edge;
+			}
+		}
+		console.log("there's no edge whose id is " + edge_id);
+		return null;
+	}
+	
+	function find_edge_by_nodes(n1, n2){
+		for(var idx = 0; idx< edges.length; idx++){
+			s_edge = edges[idx];
+			if((s_edge["from"] == n1 && s_edge["to"] == n2) ||
+			   (s_edge["from"] == n2 && s_edge["to"] == n1)){
+				return s_edge;
+			}
+		}
+		console.log("there's no edge between" + n1 + "and"+ n2);
+		return null;
+	}
+
+	function find_node_by_id(node_id){
+		for(var idx = 0; idx < nodes.length; idx++){
+			s_node = nodes[idx];
+			if(s_node["id"] == node_id){
+				return s_node;
+			}
+		}
+		console.log("there's no node whose id is " + node_id);
+		return null;
+	}
+
+	var options = {
+		physics: false,
+		edges: {
+			smooth: {
+				type: "dynamic",
+				forceDirection: "none"
+			}
+		},
+		nodes: {
+			font: {
+				face: "nanumbarungothic",
+				color: "#000000",
+			},
+			borderWidth: 2,
+			borderWidthSelected: 4,
+			shape: 'dot',
+			scaling:{
+				label: {
+					min:8,
+					max:20
+				}
+			}
+		}
+	};
+
+	var timer;
+	function draw() {
+		var container = document.getElementById('mynetwork');
+		var data = {
+			nodes: nodes,
+			edges: edges
+		};
+
+		network = new vis.Network(container, data, options);
+		network.on("selectNode", function(params){
+			s_node = find_node_by_id(params["nodes"]);
+			view_node_modal(params["nodes"]);
+		});
+		
+	}
+	
+	function wrap_color(quote, label){
+		var pattern = /#.+#/g;
+		var wraped = '<span style="color: #ec423d">' + label + '</span>';
+		str = quote.replace(pattern, wraped);
+		if(label.length != 1){
+			str = str.replace(label, wraped);
+		}
+		return str;
+	}
+	
+	function del_sharp(quote){
+		var pattern = /#/g;
+		return quote.replace(pattern, "");
+	}
+
+	function view_interview(data, textStatus, jqXGR){
+		var data_json = JSON.parse(data);
+		var intv_html = "";
+		for(var idx = 0; idx < data_json.length; idx++){
+			var obj = data_json[idx];
+			intv_html += '<a class="collection-item avatar">';
+			intv_html += '<img src="'+obj["icon"]+'" class="circle" style="border-radius: 0%;">'
+			intv_html += '<span class="title">'+obj["name"]+'</span>'
+			var quote = wrap_color(obj["quote"], obj["label"]);
+			intv_html += '<p>'+quote+'</p>'
+			intv_html += '</a>'
+		}
+		$("#intv-collection").html(intv_html);
+	}
+	
+	function view_node_modal(node_id){
+		// focus node
+		focus_on_node(node_id);
+
+		// modal 
+		s_node = find_node_by_id(node_id)
+		$.ajax({
+			type: "GET",
+			data: {
+				"ajax_name": "interview",
+				"node_label": s_node["label"],
+				"node_pos": s_node["pos"],
+			},
+			success: view_interview,
+		});
+	
+		$("#modal-node-header").text(s_node["label"]);
+
+		adj_node_id_list = network.getConnectedNodes(node_id);
+		
+		chip_list = []
+		max_value = 0;
+		for(var idx = 0; idx < adj_node_id_list.length; idx++){
+			adj_node_id = adj_node_id_list[idx];
+			bet_edge = find_edge_by_nodes(node_id, adj_node_id);
+			max_value = Math.max(max_value, bet_edge["value"]);
+			chip_list.push([bet_edge["value"], adj_node_id]);
+		}
+		chip_list.sort(function(a, b){return b[0] - a[0]});
+		
+		chip_html = "";
+		for(var idx = 0; idx < chip_list.length; idx++){
+			adj_node = find_node_by_id(chip_list[idx][1])
+			chip_html += '<div class="chip" value='+chip_list[idx][0]+' id="'+chip_list[idx][1]+'"">'+adj_node["label"]+'</div>\n'
+		}
+		$("#node-chip-collection").html(chip_html);
+
+		for(var idx = 0; idx < adj_node_id_list.length; idx++){
+			adj_node_id = adj_node_id_list[idx];
+			bet_edge_val = $("#"+adj_node_id).attr("value");
+			green = parseInt(255 - (bet_edge_val/max_value)*(255-66));
+			blue = parseInt(255 - (bet_edge_val/max_value)*(255-61));
+			$("#"+adj_node_id).css("background-color", 'rgb(236, '+green+', '+blue+')');
+			if(green < 120){
+				$("#"+adj_node_id).css("color", "#fff");
+			}
+		}
+		timer = setTimeout(function(){
+			$('#modal-node').openModal();
+		}, 700);
+	}
+	
+	function refresh_graph(data, textStatus, jqXHR){
+		var data_json = JSON.parse(data);
+		nodes_json = data_json["node"];
+		edges_json = data_json["edge"];	
+		
+		nodes=[];
+		edges=[];
+		for(var idx=0; idx < nodes_json.length; idx++){
+			nodes.push(JSON.parse(nodes_json[idx].replace(/'/gi, '"')));
+		}
+		
+		for(var idx=0; idx < edges_json.length; idx++){
+			edges.push(JSON.parse(edges_json[idx].replace(/'/gi, '"')));
+		}
+		draw();
+		update_node_id_list_for_ajax();
+		console.log(nodes.length + " / "+edges.length)
+	}
+	
+	function choose_set(data, textStatus, jqXHR){
+		var data_json = JSON.parse(data);
+		not_chosen_node_list_arr = [];
+		for(var idx=0; idx < data_json.length; idx++){
+			not_chosen_node_arr = []
+			if(node_id_list_for_ajax.indexOf(data_json[idx]["node_id"])!=-1){
+				not_chosen_node_arr[0] = '<a href="#!" class="collection-for-choose collection-item active-collection-item"';
+				not_chosen_node_arr[1] = 'node_id='+data_json[idx]["node_id"]+'>';
+				not_chosen_node_arr[2] = data_json[idx]["node_label"];
+				not_chosen_node_arr[3] = '<i style="float:right;" class="material-icons">check_circle</i>';
+				not_chosen_node_arr[4] = '</a>';
+			} else {
+				not_chosen_node_arr[0] = '<a href="#!" class="collection-for-choose collection-item" ';
+				not_chosen_node_arr[1] = 'node_id='+data_json[idx]["node_id"]+'>';
+				not_chosen_node_arr[2] = data_json[idx]["node_label"];
+				not_chosen_node_arr[3] = '<i style="float:right;" class="material-icons"></i>';
+				not_chosen_node_arr[4] = '</a>';
+
+			}
+			not_chosen_node_list_arr[idx] = not_chosen_node_arr.join("");
+		}
+		$("#not-chosen-node").html(not_chosen_node_list_arr.join(""));
+		$("#modal-choose").openModal();
+	}
+	
+	$(document).ready(function(){
+		// start
+		resize_h();
+		draw();
+
+		// node-modal 
+		$('body').on('click', '.chip', function() {
+	    	$('#modal-node').closeModal();
+			view_node_modal($(this).attr("id"));
+	    	network.selectNodes([$(this).attr("id")]);
+		});
+
+		// choose-modal
+		$("body").on("click", ".collection-for-choose", function(){
+			if($(this).hasClass("active-collection-item")){
+				$(this).removeClass("active-collection-item");
+				$(this).children("i").text("");
+			} else {
+				$(this).addClass("active-collection-item");
+				$(this).children("i").text("check_circle");
+			}
+		});
+
+		// side-bar
+		/*
+		var is_shown = true;
+		$("#swp-btn").click(function(){
+			if(is_shown){
+				$("#right-col").fadeOut("slow");
+			} else {
+				$("#right-col").fadeIn("slow");
+			}
+			is_shown = !is_shown;
+			resize_canvas_w(is_shown);
+		});
+		*/
+		
+		$("#open-new-btn").click(function(){
+			$("#bottom-col-modal").openModal();
+		});
+
+		// refresh btn
+		$("#refr-btn").click(function(){
+			$.ajax({
+				type: "GET",
+				data: {
+					"ajax_name": "refresh",
+				},
+				success: refresh_graph,
+			});
+			$("#modal-choose").closeModal();
+	    	$('#bottom-col-modal').closeModal();
+		});
+		
+		// choose btn: choose_set step1
+		$("#choose-btn").click(function(){
+			$.ajax({
+				type: "GET",
+				data: {
+					"ajax_name": "choose_set",
+					"step": 1,
+				},
+				success: choose_set,
+			});	
+		});
+		
+		// redraw-btn: choose_set step2
+		$("#redraw-btn").click(function(){
+			var chosen_node_id_list = $.makeArray(
+				$(".active-collection-item").map(function(){
+					return $(this).attr("node_id");
+			}));
+			$.ajax({
+				type: "GET",
+				data: {
+					"ajax_name": "choose_set",
+					"step": 2,
+					"chosen_node_id_list": chosen_node_id_list,
+				},
+				success: refresh_graph,
+			});
+			$("#modal-choose").closeModal();
+	    	$('#bottom-col-modal').closeModal();
+		});
+
+		$("#search").autocomplete({
+			minLenth: 1,
+			source: function( request, response ) {
+            	$.ajax({
+                    type: 'GET',
+                    data: {
+						"ajax_name": "autocomplete",
+						"node_id_list": node_id_list_for_ajax,
+						"search_text": $("#search").val()
+					},
+                    success: function(data) {
+                        response( 
+                            $.map(JSON.parse(data), function(item) {
+                                return {
+                                    value: del_sharp(item["quote"]),
+                                    label: del_sharp(item["quote"]),
+									node_id: item["node_id"]
+                                }
+                            })
+                        );
+                    }
+               });
+            },
+			select: function(event, ui){
+				node_id = ui["item"]["node_id"];
+				view_node_modal(node_id);
+				network.selectNodes([parseInt(node_id)]);
+			}
+		});
+
+	});
+
+	$(window).resize(function(){
+		resize_h();
+	})
+
+	</script>
+</head>
+
+<body>
+
+	<div id="mynetwork"></div>
+	
+	<div id="bottom-col-modal" class="modal bottom-sheet">
+		<div class="modal-content">
+			<div id="bottom-col">
+				<div class="row">
+					<a style="width: 100%;" id="choose-btn" class="waves-effect waves-light btn not-imp-btn">
+						다른 연결망 보기
+					</a>
+					<div class="card-panel">
+						<span style="font-size: 0.9em">
+							우리는 이 프로젝트를 진행하면서 총 22명의 알바생을 인터뷰했습니다. 이 웹은 인터뷰 녹취록을 의미 연결망 분석한 결과입니다. 형태소 분석과 의미 연결망 분석은 <a class="link" href="http://www.shineware.co.kr/?page_id=835">Komoran</a>과 <a class="link" href="http://www.leydesdorff.net/krkwic/">KRWIC</a>을, 시각화는 <a class="link" href="http://visjs.org/">vis.js</a>를 활용했습니다
+						</span>
+					</div>
+					<div class="card-panel">
+						<span style="font-size: 0.9em">
+							총 100여 개의 형태소 중 일부를 임의로 선택해 연결망을 그립니다. 원의 크기가 클수록 많이 등장한 형태소이고, 선의 굵기가 굵을수록 함께 등장한 횟수가 많은 단어 관계입니다.	
+						</span>
+					</div>
+			
+					<div class="card-panel">
+						<span style="font-size: 0.9em">
+							Google Newslab X 한겨레 21 = Nin<br>
+							<a href="https://www.facebook.com/yooktam/"><i style="font-size:15px;" class="material-icons">link</i> Facebook 페이지</a>에서 Team Nin의 다른 콘텐츠를 보실 수 있습니다
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<a href="http://newslabfellows.com/61/" id="see-article" class="waves-effect waves-light btn red col l2 m3 s8">
+			기사 보기
+		</a>
+		<div class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style" data-a2a-icon-color="#ec423d" style="bottom:47px; left:3px;">
+			<a class="a2a_button_facebook"></a>
+			<a class="a2a_button_twitter"></a>
+			<a class="a2a_button_kakao"></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<a id="open-new-btn" class="waves-effect waves-light btn red col l1 m2 s3">
+			<i class="material-icons">open_in_new</i>
+		</a>
+	</div>
+
+	<div id="modal-node" class="modal">
+		<div class="modal-content">
+			<h4 id="modal-node-header">Modal Header</h4>
+			<span id="node-chip-collection" class="truncate chip-collection">
+			</span>
+
+			<ul id="intv-collection" class="collection">
+			</ul>
+			<p style="color:#888888; margin:0px;" class="right-align"><small>본 인터뷰는 가명입니다</small></p>
+		</div>
+	</div>
+	
+	<div id="modal-choose" class="modal modal-fixed-footer">
+		<div class="modal-content">
+			<h5 id="modal-node-header">형태소를 선택해주세요</h5>
+			<div class="col s6">
+				<div id="not-chosen-node" class="collection">
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a id="refr-btn" class="waves-effect waves-light btn not-imp-btn">
+				랜덤으로
+			</a>
+			<a style="margin-right:3px;" id="redraw-btn" class="waves-effect waves-light btn not-imp-btn">
+				다시 그리기
+			</a>
+		</div>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script async src="//static.addtoany.com/menu/page.js"></script>
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-72407780-3', 'auto');
+	ga('send', 'pageview');
+	</script>	
+</body>
+</html>

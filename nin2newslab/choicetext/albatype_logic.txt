@@ -1,0 +1,5 @@
+﻿# albatype_logic.txt
+3
+0	3
+4	8
+9	12

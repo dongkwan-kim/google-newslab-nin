@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta property="og:title" content="{{meta.meta_title}}"/>
+		<meta property="og:type" content="{{meta.meta_type}}"/>
+		<meta property="og:url" content="{{meta.meta_url}}"/>
+		<meta property="og:description" content="{{meta.meta_description}}"/>
+		<meta property="og:image" content="{{meta.meta_image}}"/>
+
+		<meta name="description" content="">
+		<meta name="author" content="nin">
+		<link id="favicon" rel="icon" href="">
+	
+		<title>육체탐구생활</title>
+		
+		{% load staticfiles %}
+		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
+		<link href="{% static "new_nin2/font.css" %}" rel="stylesheet">
+		<script src="{% static "myscr.js" %}"></script>
+		<script>
+		$(document).ready(function(){
+			var fav_src = "/media/img/favicon/icon"+(Math.floor(Math.random()*2)+1)+".png"
+			$("#favicon").attr("href", fav_src);
+		});
+		</script>
+		<style>
+		.nav-min {
+			background-color: #ec423d;
+		}
+		</style>
+	</head>
+
+	<body>
+		<nav class="nav-min" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="/">Home</a></li>
+					<li><a href="https://www.facebook.com/yooktam/">Contact</a></li>
+				</ul>
+				<ul id="nav-mobile" class="side-nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="https://www.facebook.com/yooktam/">Contact</a></li>
+				</ul>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			</div>
+		</nav>		
+		
+		{% block content %}
+			<p>"내용"</p>
+		{% endblock %}
+
+		<!--script-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+		<script>
+		(function($){
+			$(function(){
+				$('.button-collapse').sideNav();
+			}); 
+		})(jQuery);
+		</script>
+		<script>
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-72407780-3', 'auto');
+	  	ga('send', 'pageview');
+		</script>	
+	</body>
+</html>

@@ -1,0 +1,26 @@
+.card-list{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+ 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.card-emt{
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.card-action{
+	padding: 10px!important;
+}
+
+@media (max-width: 600px){
+	.card-title{
+		font-size: 18px!important;
+		line-height: 1.5!important;
+	}
+}

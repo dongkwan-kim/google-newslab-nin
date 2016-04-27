@@ -1,0 +1,186 @@
+{% extends "nlr_ma_base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+<link href="{% static "new_nin2/nin2.css" %}" rel="stylesheet">
+<style>
+
+.result-title {
+	font-size: 50px!important;
+	font-weight: 600!important;
+	padding: 20px;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	text-shadow: black 1px 2px 10px;
+}
+
+.result-card {
+	height: auto;
+}
+
+@media (max-width: 992px){
+	height: 400px;
+}
+
+@media (max-width: 600px) 
+{
+	.result-card{
+		height: auto;
+	}
+	.reveal-title{
+		font-size: 19px!important;
+	}
+}
+
+.result-image {
+	max-height: 85%!important;
+}
+
+.a2a_kit{
+	float: left;
+	background-color: transparent;
+}
+
+.modal .modal-footer .modal-content{
+	background-color: #ffffff;
+}
+
+</style>
+<script src="{% static "animateNumber.min.js" %}"></script>
+<script>
+	function is_mobile(){
+		var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson');
+		var is_mobile = false;
+		for (var word in mobileKeyWords){
+			if (navigator.userAgent.match(mobileKeyWords[word]) != null){
+				is_mobile = true;
+				break;
+			}
+		}
+		return is_mobile;
+	}
+	$(document).ready(function(){
+		/* if mobile -> image */
+		if(!is_mobile()){
+			html_4_add = '<video style="width: 100%;" class="activator responsive-video" autoplay loop>'+
+						 '<source src="{% static "img/choice/ninx2_result.mp4" %}" type="video/mp4">'+'</video>';
+			$("#result-content").html(html_4_add);	
+		}
+
+		/* time count */
+		var day_to_earn = Math.ceil({{price}}/({{hour_pay}}*8));
+		var time_to_earn = Math.ceil({{price}}/({{hour_pay}}));
+		setTimeout(function(){
+			$("#hour").animateNumber({number: time_to_earn, easing: "easeInExpo"}, 3000);
+		}, 500);
+		$("#hour-static").text(day_to_earn);
+	});
+</script>
+
+<div style="margin-top: 30px;" class="row">
+	<div class="col l6 offset-l3 m8 offset-m2 s12">
+		<div class="nin-question">
+			<h4 style="font-size: 24px;">
+				<i class="material-icons red-icons">access_time</i>
+				<span>{{result.title}}</span>
+			</h4>
+		</div>
+		<div class="col s12">
+			<div class="card">
+				<div class="card-content">
+					<span style="font-size: 16px;">
+						시급 {{hour_pay}}원으로 <span id="price-view"></span>을 벌기 위해 필요한 시간은?
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col s12">
+			<div class="card result-card">
+				<div class="result-image card-image waves-effect waves-block waves-light">
+					<div id="result-content">	
+						<img class="activator" src="{% static "img/choice/ninx2_result.png" %}">
+					</div>
+					<span class="activator result-title card-title">
+						<span id="hour" class="activator">0</span>시간
+					</span>
+				</div>
+				<div class="card-content">
+					<i class="activator material-icons right">arrow_upward</i>
+		  			<p>하루에 8시간 일 할 때, <span id="hour-static"></span>일 걸립니다</p>
+	    		</div>
+				<div class="card-reveal">
+					<span class="card-title reveal-title grey-text text-darken-4">{{result.card_reveal_title}}<i class="material-icons right">close</i></span>
+					<p>{{result.card_reveal_content|safe}}</p>
+				</div>
+			</div>
+		</div>
+		<div class ="col s12">
+			<div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="#ec423d">
+				<a class="a2a_button_facebook"></a>
+				<a class="a2a_button_twitter"></a>
+				<a class="a2a_button_kakao"></a>
+			</div>
+			<div class="right-align">
+				<a href="/ninx2/{{result.name}}/home/" class="waves-effect waves-light btn red">다시하기</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a style="position: fixed; bottom:0px; right:3px; z-index:10" class="hide-on-small-only" href="{{result.link_url}}">
+	<img width="200px;" src="{% static "img/choice/ninx2_yudo.png" %}">
+</a>
+
+<div id="modal-popup" class="modal">
+	<div class="modal-content">
+		<a href="{{result.link_url}}">
+			<img width="100%" src="{% static "img/choice/ninx2_yudo.png" %}">
+		</a>
+	</div>
+    <div class="modal-footer">
+    	<a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">닫기</a>
+    </div>
+</div>
+
+<script async src="//static.addtoany.com/menu/page.js"></script>
+
+<script>
+$(document).ready(function(){
+	if(is_mobile()){
+		var pop = setTimeout(function(){
+			$('#modal-popup').openModal();
+		}, 5500);
+	}
+	$("#price-view").text(get_readable_won({{price}}));
+});
+
+function get_readable_won(won_value){
+	if(won_value%10000 == 0 && won_value/10000 == 0){
+		return "0 원"
+	} else if (Math.floor(won_value/10000) == 0) {
+		return won_value%10000 + "원" 
+	} else if (won_value%10000 == 0){
+		return Math.floor(won_value/10000) + "만 원" 
+	} else {
+		return Math.floor(won_value/10000) + "만 " + won_value%10000 + "원" 
+	}
+}
+
+function get_readable_hour(hour){
+	int_part = Math.floor(hour);
+	frac_part = Math.ceil((hour - int_part)*60);
+	if(frac_part == 0 && int_part == 0){
+		return frac_part + "분";
+	} else if (frac_part == 0){
+		return int_part + "시간";
+	} else if (int_part == 0){
+		return frac_part + "분";
+	}else {
+		return int_part + "시간 " + frac_part + "분";
+	}
+}
+
+</script>
+{% endblock %}
+
