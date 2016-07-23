@@ -23,7 +23,8 @@ urlpatterns = [
 
     url(r'^$', 'hellonewslab.views.front'),
     url(r'^test/$', 'hellonewslab.views.test'),
-
+    url(r"^contact/$", "hellonewslab.views.contact"),
+    
     # vote
     url(r"^sudogwon413/$", "votenewslab.views.vote_home"),
     url(r"^sudogwon413/([, \w \[\]\.]+)/$", "votenewslab.views.vote_result"),

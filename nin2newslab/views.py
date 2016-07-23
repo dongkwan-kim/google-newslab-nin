@@ -227,7 +227,7 @@ def make_graph(r_set=None, num_of_pe=45, enter_type="web"):
     if r_set == None:
         if enter_type == "web":
             r_set = make_random_set(20, 99)
-        else:
+        else: # if enter_type == "mobile"
             r_set = make_random_set(12, 99)
         is_random_graph = True
     else:

@@ -19,6 +19,9 @@ def printv(s):
 def front(request):
     return render(request, 'front.html')
 
+def contact(request):
+    return render(request, "contact.html")
+
 def test(request):
     
     save_p_list()

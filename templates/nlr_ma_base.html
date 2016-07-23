@@ -15,14 +15,13 @@
 		<meta name="author" content="nin">
 		<link id="favicon" rel="icon" href="">
 	
-		<title>육체탐구생활</title>
+		<title>Nin</title>
 		
 		{% load staticfiles %}
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
 		<link href="{% static "new_nin2/font.css" %}" rel="stylesheet">
-		<script src="{% static "myscr.js" %}"></script>
 		<script>
 		$(document).ready(function(){
 			var fav_src = "/media/img/favicon/icon"+(Math.floor(Math.random()*2)+1)+".png"
@@ -41,11 +40,11 @@
 			<div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="/">Home</a></li>
-					<li><a href="https://www.facebook.com/yooktam/">Contact</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<ul id="nav-mobile" class="side-nav">
 					<li><a href="/">Home</a></li>
-					<li><a href="https://www.facebook.com/yooktam/">Contact</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			</div>
