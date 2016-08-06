@@ -13,7 +13,7 @@
   - Language of Part-time job
 
 ## Another work
-- Voting intentions of capital area(Seoul, Inchoen, Gyeonggi-do)
+- Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do)
 
 ## Related blog post
 - not yet
