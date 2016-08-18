@@ -16,4 +16,4 @@
 - Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do)
 
 ## Related blog post
-- not yet
+- [Google Newslab Fellowship Epilogue](https://todoaskit.github.io/Google-Newslab-Fellowship-Epilogue/)
