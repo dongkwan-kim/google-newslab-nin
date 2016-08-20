@@ -9,7 +9,7 @@
 - This repository has only Interactive News Contents. If you want to see other works such as video, visit our [facebook page](https://www.facebook.com/yooktam/)
 - List
   - NinNin
-  - Yookgap(price for your physical health) Calculator [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/calc_home.html)
+  - Yookgap(price for your physical health) Calculator [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/calc.html)
   - Language of Part-time job [[Prototype]](http://todoaskit.github.io/google-newslab-nin/demo/network.html)
 
 ## Another work
