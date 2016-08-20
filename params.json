@@ -1,0 +1,6 @@
+{
+  "name": "Google-newslab-nin",
+  "tagline": "Google News Lab Fellowship 2015/2016 Korea - Nin team with Hankyoreh 21",
+  "body": "## 한국어\r\n### 닌팀의 인터랙티브 뉴스 데모 페이지에 오신 것을 환영합니다\r\n- 구글 뉴스랩 펠로우쉽 2015/2016 대한민국\r\n- 한겨레 21과 협업한 닌팀\r\n- 이전 페이지: http://nin.newslabfellows.com/ (현재 작동하지 않습니다)\r\n\r\n### 정적 페이지입니다\r\n- ajax와 같은 서버 통신이 필요한 기능은 작동하지 않습니다.\r\n- 이 같은 기능은 자바스크립트를 이용하여 대체되었습니다.\r\n\r\n## English\r\n### Welcome to Interactive news demo page of Nin\r\n- Google News Lab Fellowship 2015/2016 Korea\r\n- Nin team with Hankyoreh 21\r\n- Previous page: http://nin.newslabfellows.com/ (not works now)\r\n\r\n### It is Static page\r\n- Function that needs server communication(e.g. ajax) does not work\r\n- It replaces with javascript tricks",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
