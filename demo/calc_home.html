@@ -10,11 +10,10 @@
 	
 		<title>육값계산기 데모</title>
 		
-		{% load staticfiles %}
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
-		<link href="{% static "new_nin2/font.css" %}" rel="stylesheet">
+		<link href="./static/new_nin2/font.css" rel="stylesheet">
 
 		<style>
 		.nav-min {
@@ -58,7 +57,7 @@ $(document).ready(function(){
 });
 </script>
 
-<script src="{% static "wNumb.js" %}"></script>
+<script src="./static/wNumb.js"></script>
 <link href="./static/nouislider/nouislider.css" rel="stylesheet">
 <script src="./static/nouislider/nouislider.js"></script>
 <link href="./static/new_nin2/calc.css" rel="stylesheet">
@@ -99,16 +98,16 @@ $(document).ready(function(){
 					</h4>
 					<div class="col l7 m6 s12">
 						<div class="chip sg-btn">
-						    <img src="{% static "img/calc/10000won.png" %}">만
+						    <img src="./static/img/calc/10000won.png">만
 						</div>
 						<div class="chip sg-btn">
-						    <img src="{% static "img/calc/1000won.png" %}">천
+						    <img src="./static/img/calc/1000won.png %}">천
 						</div>
 						<div class="chip sg-btn">
-						    <img src="{% static "img/calc/100won.png" %}">백
+						    <img src="./static/img/calc/100won.png">백
 						</div>
 						<div class="chip sg-btn">
-						    <img src="{% static "img/calc/10won.png" %}">십
+						    <img src="./static/img/calc/10won.png">십
 						</div>
 						<input value=6030 id="seegeup" type="hidden"></input>
 					</div>
@@ -250,11 +249,10 @@ $(document).ready(function(){
 <script async src="//static.addtoany.com/menu/page.js"></script>
 
 <a style="position: fixed; bottom:0px; right:3px; z-index:10" class="hide-on-med-and-down" href="http://newslabfellows.com/61">
-	<img width="200px;" src="{% static "img/choice/ninx2_yudo.png" %}">
+	<img width="200px;" src="./static/img/choice/ninx2_yudo.png">
 </a>
 
-
-<!-- Modal -->
+<!--
 {% for mobj in modals %}
 <div id="{{mobj.modal_id}}" class="modal">
 	<div class="modal-content">
@@ -263,8 +261,8 @@ $(document).ready(function(){
 	</div>
  </div>
 {% endfor %}
-
-<script src="{% static "new_nin2/calc.js" %}"></script>
+-->
+<script src="./static/new_nin2/calc.js"></script>
 
 		<!--script-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
