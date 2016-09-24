@@ -7,7 +7,10 @@ import json
 
 def to_utf8(thing):
     if type(thing) == type(""):
-        return thing.decode("unicode-escape").encode("utf8")
+        try:
+            return thing.decode("unicode-escape").encode("utf8")
+        except:
+            return thing
 
 def autocomplete_ajax(request):
     search_text = request.GET.get("search_text")
@@ -36,7 +39,7 @@ def vote_home(request):
         else:
             select_reg = VoteRegion.objects.filter(Q(admin_region__contains=reg_input) | Q(election_district__contains=reg_input))
             select_reg_avg = VoteRegion.objects.filter(Q(admin_region="avg") & Q(election_district__contains=reg_input))
-        
+
         if len(select_reg) == 1:
             reg_id = select_reg[0].region_id
         else:
@@ -52,7 +55,7 @@ def vote_home(request):
                 return render(request, "votetemp/sg_error.html", {"big_msg": big_msg, "small_msg": small_msg})
 
         return redirect("/sudogwon413/"+reg_id+"/")
-    
+
     meta = Meta.objects.filter(meta_name="sudogwon")[0]
     return render(request, "votetemp/sg_home.html", {"meta": meta})
 
@@ -67,14 +70,14 @@ def vote_result(request, reg_id):
     else:
         win_region = "야권 우세지역입니다"
         party_color = "#007CB8"
-    
+
     if vote_region.admin_region != "avg":
         vr_msg = vote_region.wide_region +" "+vote_region.admin_region + "[" + vote_region.election_district + "]"
     else:
         vr_msg = vote_region.wide_region +" "+vote_region.election_district
-        
+
     cand_list = Candidate.objects.filter(cand_region_id=reg_id[:32])
-        
+
     other_ar_list = VoteRegion.objects.filter(wide_region=vote_region.wide_region, election_district__startswith=vote_region.election_district.split("(")[0]).order_by("admin_region")
 
     meta = Meta.objects.filter(meta_name="sudogwon")[0]
