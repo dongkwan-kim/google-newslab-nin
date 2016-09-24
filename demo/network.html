@@ -4579,6 +4579,7 @@
 		$('body').on('click', '.chip', function() {
 	    	$('#modal-node').closeModal();
 	    	view_node_modal($(this).attr("id"));
+	    	network.selectNodes([$(this).attr("id")]);
 		});
 
 		// side-bar
