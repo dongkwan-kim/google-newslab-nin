@@ -20,7 +20,10 @@ def printv(s):
 
 def to_utf8(thing):
     if type(thing) == type(""):
-        return thing.decode("unicode-escape").encode("utf8")
+        try:
+            return thing.decode("unicode-escape").encode("utf8")
+        except:
+            return thing
 
 def make_id(length):
     ret_str = ""
@@ -28,7 +31,7 @@ def make_id(length):
         ret_str += str(random.randint(0,9))
     return ret_str
 
-# calc 
+# calc
 def calc_home(request):
     modals = Modal.objects.filter(name="calc")
     meta = Meta.objects.filter(meta_name="calc")[0]
@@ -75,10 +78,10 @@ def get_price_4_pay(chosen_dict, choice_name):
 
     elif choice_name == "apple":
         data_0 = chosen_dict["0"].split(",")
-        
+
         choice_list_0 = Problem.objects.filter(name=choice_name, idx=0)[0].get_choice_list()
         idx_board = dict([("c"+str(i+1), i) for i in range(len(choice_list_0))])
-        
+
         for fidx in range(len(data_0)):
             index_0 = idx_board[data_0[fidx]]
             its_price = int(choice_list_0[index_0].value)
@@ -87,7 +90,7 @@ def get_price_4_pay(chosen_dict, choice_name):
 
 def get_choice_from_POST(post_query_dict):
     temp_list = []
-    key_list = post_query_dict.keys()
+    key_list = list(post_query_dict.keys())
     key_list.sort()
     for reqkey in key_list:
         if "choice" in reqkey:
@@ -133,7 +136,7 @@ def choice_home(request, choice_name):
 
 def search_univ_for_ajax(request):
     search_text = request.GET.get("search_text")
-    if search_text is not None and search_text != u"":
+    if search_text is not None and search_text != "":
         univ_list = Univ.objects.filter(name__contains = search_text)
         univ_json_list = []
         for univ in univ_list:
@@ -149,10 +152,10 @@ def choice_nump(request, choice_name, id_data):
     # univ search for tuition
     if request.is_ajax():
         return HttpResponse(search_univ_for_ajax(request))
-    
+
     id_list = UserChoice.objects.filter(name=choice_name, user_id=id_data)
     your_id = id_list[len(id_list) - 1]
-    
+
     # not first problem
     if request.method == "POST":
         chosen_dict = json.loads(your_id.chosen_json)
@@ -162,13 +165,13 @@ def choice_nump(request, choice_name, id_data):
         chosen_dict[str(chosen_len)] = get_choice_from_POST(request.POST)
         your_id.chosen_json = to_utf8(json.dumps(chosen_dict))
         your_id.save()
-        
+
         next_num = chosen_len + 1
         # last problem
         if next_num == len(Problem.objects.filter(name=choice_name)):
             redir_url = "../result/"+str(id_data) + "/"
             return redirect(redir_url)
-        
+
         # not first and not last
         else:
             problem = Problem.objects.filter(name=choice_name, idx=next_num)[0]
@@ -232,16 +235,16 @@ def make_graph(r_set=None, num_of_pe=45, enter_type="web"):
         is_random_graph = True
     else:
         is_random_graph = False
-    
+
     node_list = []
     edge_list = []
-    
+
     # append nodes by r_set
     exist_nodes = []
     for r_num in r_set:
         s_node = BofuNode.objects.filter(node_id=r_num)[0]
         exist_nodes.append(s_node)
-    
+
     # append edge's value and sort
     edge_val_list = []
     exist_edges = []
@@ -252,7 +255,7 @@ def make_graph(r_set=None, num_of_pe=45, enter_type="web"):
             edge_val_list.append(s_edge[0].edge_value)
             exist_edges.append(s_edge[0])
     edge_val_list.sort(reverse=True)
-    
+
     # append edges whose value is higher than standard
     num_of_pe = min(num_of_pe, len(edge_val_list)-1)
     if enter_type == "web":
@@ -263,7 +266,7 @@ def make_graph(r_set=None, num_of_pe=45, enter_type="web"):
         for e in exist_edges:
             if e.edge_value > edge_val_list[30]:
                 edge_list.append(e)
-    
+
     # del alone-node
     for n in exist_nodes:
         is_alone = True
@@ -276,7 +279,7 @@ def make_graph(r_set=None, num_of_pe=45, enter_type="web"):
 
     # make edge obj to json
     edge_list = [e.edge_json for e in edge_list]
-    
+
     return Network(node_list, edge_list)
 
 def refresh_ajax(enter_type):
@@ -304,7 +307,7 @@ def interview_ajax(request):
 def autocomplete_ajax(request):
     node_id_list = request.GET.getlist("node_id_list[]")
     search_text = request.GET.get("search_text")
-    intv_json_list = [] 
+    intv_json_list = []
     for node_id in node_id_list:
         intv_list = BofuInterview.objects.filter(intv_id=node_id, intv_quote__contains = search_text)
         for intv in intv_list:
@@ -340,7 +343,7 @@ def choose_set_ajax(request, enter_type):
     return "done, but not implemented"
 
 def network(request, enter_type):
-    
+
     if request.is_ajax():
         ajax_name = request.GET.get("ajax_name")
         if ajax_name == "refresh":
@@ -351,11 +354,11 @@ def network(request, enter_type):
             return HttpResponse(autocomplete_ajax(request))
         elif ajax_name == "choose_set":
             return HttpResponse(choose_set_ajax(request, enter_type))
-    
+
     rg = make_graph(enter_type=enter_type)
     node_list = rg.v
     edge_list = rg.e
-    
+
     meta = Meta.objects.filter(meta_name="albawords")[0]
     if enter_type == "web":
         return render(request, "network/network-server.html", {"meta":meta, "nodes": node_list, "edges": edge_list})

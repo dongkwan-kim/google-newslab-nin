@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from nin2newslab.models import Univ, Modal, UserChoice, Nin2Content, Problem, Nin2Result, Home
 from nin2newslab.models import BofuNode, BofuEdge, BofuInterview
 from votenewslab.models import Candidate, VoteRegion
-import md5
+# import md5
+import hashlib
 # Create your views here.
 
 # for debug
@@ -23,21 +24,21 @@ def contact(request):
     return render(request, "contact.html")
 
 def test(request):
-    
+
     save_p_list()
     save_reg_list()
-    
+
     #clear_graph()
     #save_graph()
     #save_intv()
     return render(request, "test.html")
-    
+
     choice_name = "tuition"
     result = Nin2Result.objects.filter(name=choice_name)[0]
     price_4_pay = 700000
     hour_pay = 6030
     return render(request, "nin2temp/new_choice/choice_result_nin2pay.html", {"result": result, "price": price_4_pay, "hour_pay": hour_pay})
-        
+
 def network(request):
     return render(request, "network/network-local.html")
 
@@ -108,7 +109,7 @@ def save_graph():
             if edge_idx < n:
                 for col_idx in range(len(row)):
                     if int(row[col_idx]) > 0:
-			edge_str = "{'from': "+str(edge_idx)+\
+                        edge_str = "{'from': "+str(edge_idx)+\
                                    ", 'to': "+str(edge_idx+col_idx+1)+\
                                    ", 'value': "+str(row[col_idx])+\
                                    ", 'color': { 'color': '#8d827a', 'highlight': '#eb4343'}"\
@@ -121,7 +122,7 @@ def save_intv():
     intlist = BofuInterview.objects.all()
     for i in intlist:
         i.delete()
-    
+
     int_dict = {}
     for line in open("interview.txt", "r"):
         if "/" in line and "." in line:
@@ -136,7 +137,7 @@ def save_intv():
             sen = "(".join(line_arr[:-1]).strip()
             per = line_arr[-1].replace(")", "").strip().replace(",", ", ")
             int_dict[flag].append([sen, per])
-    
+
     for (k, v) in int_dict.items():
         label = k.split("/")[0]
         pos = k.split("/")[1]
@@ -157,22 +158,22 @@ def save_p_list():
     p_list = Candidate.objects.all()
     for p in p_list:
         p.delete()
-    
+
     party_color_dict = {"새누리": "#F44336", "더민주": "#007CB8", "국민의당": "#6B9D30", "정의당": "#FFCA08"}
-    
+
     for line in open("p_list(utf8).txt", "r"):
         if "#" in line:
             continue
         arr = line.split("\t")
-        
+
         cand_name = arr[4]
         try:
             cand_party_color = party_color_dict[arr[2]]
         except:
             cand_party_color = "#A3A3A3"
-        
+
         s = arr[0].replace("경기", "경기도").replace(" ", "")
-        cand_region_id = md5.md5(s).hexdigest()
+        cand_region_id = hashlib.md5(s).hexdigest()
 
         cand_profile = ", ".join([arr[2], arr[5], arr[6], arr[7]])
         cand_id = arr[3]
@@ -189,7 +190,7 @@ def save_reg_list():
         if "#" in line:
             continue
         arr = line.split("\t")
-        
+
         for idx in range(len(arr)):
             arr[idx] = arr[idx].strip()
 
@@ -213,7 +214,7 @@ def save_reg_list():
         sanuri_avg = arr[10]
         sanuri_act = arr[9]
         sanuri_pas = arr[8]
-        
+
         s1 = md5.md5(wide_region + election_district.split("(")[0]).hexdigest()
         s2 = md5.md5(admin_region).hexdigest()
         region_id = s1+s2
