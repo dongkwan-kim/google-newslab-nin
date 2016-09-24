@@ -8,8 +8,10 @@
 		<meta property="og:title" content="육값계산기"/>
 		<meta property="og:description" content="육값계산기 데모 | hosting by github"/>
 		<meta name="Description" content="육값계산기, 구글 뉴스랩 펠로우십, Nin, 한겨레21, 아르바이트, 최저 시급, 주휴 수당, 야간 수당, 휴일 수당">
+
+		<meta property="og:image" content=".static/img/front/calc_meta.png"/>
 	
-		<title>육값계산기 데모</title>
+		<title>육값계산기</title>
 		
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -254,36 +256,61 @@ $(document).ready(function(){
 </a>
 
 
+<!-- Modal -->
+
+<div id="modal-wkhol" class="modal">
+	<div class="modal-content">
+		<h5>5일 개근했다면</h5>
+		<p><div class="card-panel hoverable red white-text">
+<span style="font-size: 19px;">근로기준법 제55조(휴일)</span><br>
+사용자는 근로자에게 1주일에 평균 1회 이상의 유급휴일을 주어야 한다.
+</div>
+<p>일주일 동안 15시간을 일했고, 개근했다면 '돈받고 쉬는 날'을 즐기세요. 주휴수당은 5일 근로자를 기준으로 하루 일당에 해당합니다.</p></p>	
+	</div>
+ </div>
+
+<div id="modal-nt" class="modal">
+	<div class="modal-content">
+		<h5>밤에 일하셨다면</h5>
+		<p><div class="card-panel hoverable red white-text">
+<span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
+사용자는 야간근로(오후 10시부터 오전 6시)에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
+</div>
+<p>생활 리듬을 거스른 당신. 힘든 만큼 더 챙겨가세요.</p>
+<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
+	</div>
+ </div>
+
 <div id="modal-rt" class="modal">
 	<div class="modal-content">
 		<h5>실근무 수당</h5>
-		<p></p>	
+		<p>업무 시간에 시간을 곱한 기본 수당(업무 시간 X 시급)입니다.</p>	
 	</div>
-</div>
-<div id="modal-wkhol" class="modal">
-	<div class="modal-content">
-		<h5>주휴 수당</h5>
-		<p></p>	
-	</div>
-</div>
-<div id="modal-nt" class="modal">
-	<div class="modal-content">
-		<h5>야간 수당</h5>
-		<p></p>	
-	</div>
-</div>
+ </div>
+
 <div id="modal-extnd" class="modal">
 	<div class="modal-content">
-		<h5>연장 수당</h5>
-		<p></p>	
-	</div>
+		<h5>더 일하셨다면</h5>
+		<p><div class="card-panel hoverable red white-text">
+<span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
+사용자는 사용자는 연장근로에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
 </div>
+<p>일주일 법정 근로 시간인 40시간을 초과했다면, 초과한 시간의 급여는 시급의 1.5배입니다.</p>
+ <p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
+	</div>
+ </div>
+
 <div id="modal-holid" class="modal">
 	<div class="modal-content">
-		<h5>휴일 수당</h5>
-		<p></p>	
-	</div>
+		<h5>휴일에 일하셨다면</h5>
+		<p><div class="card-panel hoverable red white-text">
+<span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
+휴일근로에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
 </div>
+<p>5월 1일 근로자의 날이나 유급 휴가 날에 일하셨다면 1.5배 가산된 금액을 받으세요.</p>
+<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
+	</div>
+ </div>
 
 <script src="./static/new_nin2/calc.js"></script>
 
