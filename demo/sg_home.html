@@ -72,15 +72,16 @@
 			</div>
 		</div>
       	<div class="row center">
-			<form method="POST">
+			<form>
+				<input name="region" id="region-hash" type="hidden" value="0">
 				<div class="input-field col l8 offset-l2 m10 offset-m1 s12">
-					<input name="reg" id="reg-or-adm" type="text" class="validate">
+					<input id="reg-or-adm" type="text" class="validate">
 					<label for="reg-or-adm">지역구/행정동을 입력해주세요</label>
 				</div>
 				<div class="col s12">
-					<button id="submit-btn" class="btn waves-effect waves-light" type="submit">찾기
+					<a id="submit-btn" class="btn waves-effect waves-light">찾기
 						<i class="material-icons right">search</i>
-					</button>
+					</a>
 				</div>
 			</form>
 		</div>
@@ -94,7 +95,7 @@
 	</div>
 </div>
 
-<input id="region-hash" type="hidden" value="0">
+
 
 <footer class="page-footer">
 	<div class="container">
@@ -1400,20 +1401,24 @@ function find_hash_with_label(label){
 	return -1;
 }
 
-
 $(document).ready(function(){
 	// footer magin
 	var footer_top_margin = -40 + $(window).height() - $(".nav-min").height() - $("#index-banner").height();
 	$(".page-footer").css("margin-top", footer_top_margin);
 	
 	$("#submit-btn").click(function(){
-		console.log($("#region-hash").val());
-		/*
-		alert("아래에 동의하셔야 결과를 무료로 볼 수 있습니다.\n\n"+
-				"선거 관계자라면, 깨끗한 정책 선거를 하겠습니다.\n"+
-				"유권자라면, 후보를 꼼꼼하게 따져 4월 13일에 꼭 투표하겠습니다.");
-*/
-		location.href="https://github.com/todoaskit/google-newslab-nin/blob/master/templates/network/network-server.html";
+		var hash_val = $("#region-hash").val();
+		if(hash_val == 0){
+			location.href="./sg_error.html?error=manyfound&query="+ hash_val;
+		} else if (hash_val == -1){
+			location.href="./sg_error.html?error=notfound";
+		} else {
+			
+			alert("아래에 동의하셔야 결과를 무료로 볼 수 있습니다.\n\n"+
+					"선거 관계자라면, 깨끗한 정책 선거를 하겠습니다.\n"+
+					"유권자라면, 후보를 꼼꼼하게 따져 4월 13일에 꼭 투표하겠습니다.");
+			location.href="./sg_result.html?query=" + hash_val;
+		}
 	});
 	
 	if(is_mobile()){
