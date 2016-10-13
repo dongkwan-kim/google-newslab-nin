@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta property="og:title" content="육값계산기"/>
-		<meta property="og:description" content="육값계산기 데모 | hosting by github"/>
-		<meta name="Description" content="육값계산기, 구글 뉴스랩 펠로우십, Nin, 한겨레21, 아르바이트, 최저 시급, 주휴 수당, 야간 수당, 휴일 수당">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta property="og:title" content="육값계산기"/>
+        <meta property="og:description" content="육값계산기 데모 | hosting by github"/>
+        <meta name="Description" content="육값계산기, 구글 뉴스랩 펠로우십, Nin, 한겨레21, 아르바이트, 최저 시급, 주휴 수당, 야간 수당, 휴일 수당">
 
-		<meta property="og:image" content="./static/img/front/calc_meta.png"/>
-	
-		<title>육값계산기</title>
-		
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
-		<link href="./static/new_nin2/font.css" rel="stylesheet">
+        <meta property="og:image" content="./static/img/front/calc_meta.png"/>
+    
+        <title>육값계산기</title>
+        
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">        
+        <link href="./static/new_nin2/font.css" rel="stylesheet">
 
-		<style>
-		.nav-min {
-			background-color: #ec423d;
-		}
-		</style>
-	</head>
+        <style>
+        .nav-min {
+            background-color: #ec423d;
+        }
+        </style>
+    </head>
 
-	<body>
-		<nav class="nav-min" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="./home.html">Home</a></li>
-					<li><a href="./contact.html">Contact</a></li>
-				</ul>
-				<ul id="nav-mobile" class="side-nav">
-					<li><a href="./home.html">Home</a></li>
-					<li><a href="./contact.html">Contact</a></li>
-				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-			</div>
-		</nav>		
-		
+    <body>
+        <nav class="nav-min" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>        
+        
 <style>
 #share-btn{
-	float: right;
-	margin-top: -80px;
+    float: right;
+    margin-top: -80px;
 
 }
 @media (max-width: 600px) {
-	#share-btn{
-		margin: 0px auto;
-		margin-top: 20px;
-	}
+    #share-btn{
+        margin: 0px auto;
+        margin-top: 20px;
+    }
 }
 </style>
 
 <script>
 $(document).ready(function(){
-	$('.tooltipped').tooltip({delay: 50});
+    $('.tooltipped').tooltip({delay: 50});
 });
 </script>
 
@@ -67,270 +67,270 @@ $(document).ready(function(){
 <link href="./static/new_nin2/nin2.css" rel="stylesheet">
 
 <div class="row nin-head">
-	<div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1">
-		<img id="title-img" src="./static/img/calc/title_calc.png">
-		<img class="hide-on-small-only" height="85px" style="float: right;" src="./static/img/choice/ninx2_char.png">
-		<div class="divider"></div>
-		<h4 style="font-size: 24px;">당신이 파는 당신의 몸,</h4>
-		<p>그 값은 제대로 챙겨받고 계십니까?</p>
-		<!--share-->
-		<div id="share-btn" class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="#ec423d">
-			<a class="a2a_button_facebook"></a>
-			<a class="a2a_button_twitter"></a>
-			<a class="a2a_button_kakao"></a>
-			<a class="a2a_button_line"></a>
-		</div>
+    <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1">
+        <img id="title-img" src="./static/img/calc/title_calc.png">
+        <img class="hide-on-small-only" height="85px" style="float: right;" src="./static/img/choice/ninx2_char.png">
+        <div class="divider"></div>
+        <h4 style="font-size: 24px;">당신이 파는 당신의 몸,</h4>
+        <p>그 값은 제대로 챙겨받고 계십니까?</p>
+        <!--share-->
+        <div id="share-btn" class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="#ec423d">
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_twitter"></a>
+            <a class="a2a_button_kakao"></a>
+            <a class="a2a_button_line"></a>
+        </div>
 
-	</div>
+    </div>
 </div>
 
 <div class="row">
-	<!-- left col. -->
-	<div class="col l5 offset-l2 m6 offset-m1">
-		<!-- hourly wage card -->
-		<div class="card">
-			<div class="card-content">
-				<div class="card-title">
-					<strong>시급 </strong>
-					<i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="올해의 최저시급은 6030원입니다">search</i>
-				</div>
-				<div class="row">	
-					<h4 class="text-center col l5 m6 s12 view-specvalue">
-						<span id="view-seegeup">시급</span>
-						<i style="float:right;" id="refr-seegeup" class="icon-min material-icons">replay</i>
-					</h4>
-					<div class="col l7 m6 s12">
-						<div class="chip sg-btn">
-						    <img src="./static/img/calc/10000won.png">만
-						</div>
-						<div class="chip sg-btn">
-						    <img src="./static/img/calc/1000won.png">천
-						</div>
-						<div class="chip sg-btn">
-						    <img src="./static/img/calc/100won.png">백
-						</div>
-						<div class="chip sg-btn">
-						    <img src="./static/img/calc/10won.png">십
-						</div>
-						<input value=6030 id="seegeup" type="hidden"></input>
-					</div>
-				</div>
-			</div>
-		</div><!--end of hourly wage card-->
-		
-		<!-- time range card -->
-		<div class="card">
-			<div class="card-content">
-				<div class="card-title">
-					<strong>업무 시간 </strong>
-					<i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="일주일 법정 근로시간은 40시간입니다">search</i>
-					<div style="margin-top:-55px;" class="right-align switch">
-					    <label>
-						주간
-						<input id="chan-timerange" type="checkbox">
-						<span class="lever"></span>
-						야간
-						</label>
-					</div>
-				</div>
-				<div class="row">	
-					<h4 style="padding-bottom: 7px;" class="text-center col l5 m6 s12 view-specvalue">
-						<span id="view-timerange">시간</span>
-					</h4>
-					<div class="col l7 m6 s12">
-						<div id="timechange"></div>
-						<script>
-						var	tr_slider = document.getElementById("timechange");
-						noUiSlider.create(tr_slider, {
-							start: [9, 18],
-							connect: true,
-							step: 1,
-							range: {
-								'min': 0,
-								'max': 24
-							},
-							format: wNumb({
-								decimals: 0
-							})
-						});
-						</script>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input type="number" id="meal-time" placeholder="시간" min="0" step="1" max="4" value=1>
-						<label for="meal-time">휴게 시간(h)</label>
-					</div>
-				</div>
-			</div>
-		</div><!--end of timechange card-->
+    <!-- left col. -->
+    <div class="col l5 offset-l2 m6 offset-m1">
+        <!-- hourly wage card -->
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">
+                    <strong>시급 </strong>
+                    <i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="올해의 최저시급은 6030원입니다">search</i>
+                </div>
+                <div class="row">    
+                    <h4 class="text-center col l5 m6 s12 view-specvalue">
+                        <span id="view-seegeup">시급</span>
+                        <i style="float:right;" id="refr-seegeup" class="icon-min material-icons">replay</i>
+                    </h4>
+                    <div class="col l7 m6 s12">
+                        <div class="chip sg-btn">
+                            <img src="./static/img/calc/10000won.png">만
+                        </div>
+                        <div class="chip sg-btn">
+                            <img src="./static/img/calc/1000won.png">천
+                        </div>
+                        <div class="chip sg-btn">
+                            <img src="./static/img/calc/100won.png">백
+                        </div>
+                        <div class="chip sg-btn">
+                            <img src="./static/img/calc/10won.png">십
+                        </div>
+                        <input value=6030 id="seegeup" type="hidden"></input>
+                    </div>
+                </div>
+            </div>
+        </div><!--end of hourly wage card-->
+        
+        <!-- time range card -->
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">
+                    <strong>업무 시간 </strong>
+                    <i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="일주일 법정 근로시간은 40시간입니다">search</i>
+                    <div style="margin-top:-55px;" class="right-align switch">
+                        <label>
+                        주간
+                        <input id="chan-timerange" type="checkbox">
+                        <span class="lever"></span>
+                        야간
+                        </label>
+                    </div>
+                </div>
+                <div class="row">    
+                    <h4 style="padding-bottom: 7px;" class="text-center col l5 m6 s12 view-specvalue">
+                        <span id="view-timerange">시간</span>
+                    </h4>
+                    <div class="col l7 m6 s12">
+                        <div id="timechange"></div>
+                        <script>
+                        var    tr_slider = document.getElementById("timechange");
+                        noUiSlider.create(tr_slider, {
+                            start: [9, 18],
+                            connect: true,
+                            step: 1,
+                            range: {
+                                'min': 0,
+                                'max': 24
+                            },
+                            format: wNumb({
+                                decimals: 0
+                            })
+                        });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="number" id="meal-time" placeholder="시간" min="0" step="1" max="4" value=1>
+                        <label for="meal-time">휴게 시간(h)</label>
+                    </div>
+                </div>
+            </div>
+        </div><!--end of timechange card-->
 
-		<!-- date card -->
-		<div class="card">
-			<div class="card-content">
-				<div class="card-title">
-					<strong>업무 요일 </strong>
-					<i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="1주에 15시간 일했다면 주휴수당을 받으세요">search</i>
-				</div>
-				<div class="row">
-					<div class="btn-group-justified center-align">
-						<a class="btn btn-week red active"><i class="material-icons">done</i></a>
-						<a class="btn btn-week red active"><i class="material-icons">done</i></a>
-						<a class="btn btn-week red active"><i class="material-icons">done</i></a>
-						<a class="btn btn-week red active"><i class="material-icons">done</i></a>
-						<a class="btn btn-week red active"><i class="material-icons">done</i></a>
-						<a class="btn btn-week red btn-weekends">토</a>
-						<a class="btn btn-week red btn-weekends">일</a>
-					</div>
-				</div>
-			</div>
-		</div><!--end of date card-->
-	
-		<!-- extra cond. card -->
-		<div class="card">
-			<div class="card-content">
-				<div class="card-title">
-					<strong>5인 이상 사업장 </strong>
-					<i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="5인 미만 사업장에서 근무하시면, 야간 수당/연장 수당/휴일 수당을 받으실 수 없습니다">search</i>
-				</div>
-				<div style="margin-bottom: 0px;" class="row">
-					<p>
-						<input class="extra-cond" type="checkbox" id="ec2"/>
-						<label for="ec2">그곳에서 일하는 사람이 5명 미만이었나요?</label>
-					</p>
-				</div>
-			</div>
-		</div><!--end of extra cond. card-->
-	</div><!--end of left col.-->
-	
-	<!--right col.-->
-	<div class="col l3 m4 rcol-with-footer">
-		<div class="rcol-top-border card">
-			<div style="padding: 10px;" class="white-text rcol-top-border card-panel red">
-				<span class="nin-panel-title" id="result">Loading...</span>
-				<i onclick="scroll_to_table();" style="float:right;" class="material-icons hide-on-med-and-up">pageview</i>
-				<script>
-					function scroll_to_table(){
-						$('html, body').stop().animate({
-							scrollTop : $('.table').offset().top-window.innerHeight/2+$('.table').height()/2,
-						});
-					}
-				</script>
-			</div>
-		</div>
-	</div>
-	<div class="col l3 m4 s12">
-		<p style="text-align: center; argin-top: 10px; font-size: 80%; font-weight: 600;">
-			클릭하면 산출 근거를 보실 수 있습니다
-		</p>
-		<table style="cursor:pointer;" class="table centered bordered highlight">
-			<tbody>
-				<tr class="modal-trigger" id="modal-trigger-rt">
-					<td>실근무 수당</td>
-					<td id="rt"></td>
-				</tr>
-				<tr class="modal-trigger" id="modal-trigger-wkhol">
-					<td>주휴 수당</td>
-					<td id="wkhol"></td>
-				</tr>
-				<tr class="modal-trigger" id="modal-trigger-nt">
-					<td>야간 수당</td>
-					<td id="nt"></td>
-				</tr>
-				<tr class="modal-trigger" id="modal-trigger-extnd">
-					<td>연장 수당</td>
-					<td id="extnd"></td>
-				</tr>
-				<tr class="modal-trigger" id="modal-trigger-holid">
-					<td>휴일 수당</td>
-					<td id="holid"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+        <!-- date card -->
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">
+                    <strong>업무 요일 </strong>
+                    <i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="1주에 15시간 일했다면 주휴수당을 받으세요">search</i>
+                </div>
+                <div class="row">
+                    <div class="btn-group-justified center-align">
+                        <a class="btn btn-week red active"><i class="material-icons">done</i></a>
+                        <a class="btn btn-week red active"><i class="material-icons">done</i></a>
+                        <a class="btn btn-week red active"><i class="material-icons">done</i></a>
+                        <a class="btn btn-week red active"><i class="material-icons">done</i></a>
+                        <a class="btn btn-week red active"><i class="material-icons">done</i></a>
+                        <a class="btn btn-week red btn-weekends">토</a>
+                        <a class="btn btn-week red btn-weekends">일</a>
+                    </div>
+                </div>
+            </div>
+        </div><!--end of date card-->
+    
+        <!-- extra cond. card -->
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">
+                    <strong>5인 이상 사업장 </strong>
+                    <i class="icon-min material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="5인 미만 사업장에서 근무하시면, 야간 수당/연장 수당/휴일 수당을 받으실 수 없습니다">search</i>
+                </div>
+                <div style="margin-bottom: 0px;" class="row">
+                    <p>
+                        <input class="extra-cond" type="checkbox" id="ec2"/>
+                        <label for="ec2">그곳에서 일하는 사람이 5명 미만이었나요?</label>
+                    </p>
+                </div>
+            </div>
+        </div><!--end of extra cond. card-->
+    </div><!--end of left col.-->
+    
+    <!--right col.-->
+    <div class="col l3 m4 rcol-with-footer">
+        <div class="rcol-top-border card">
+            <div style="padding: 10px;" class="white-text rcol-top-border card-panel red">
+                <span class="nin-panel-title" id="result">Loading...</span>
+                <i onclick="scroll_to_table();" style="float:right;" class="material-icons hide-on-med-and-up">pageview</i>
+                <script>
+                    function scroll_to_table(){
+                        $('html, body').stop().animate({
+                            scrollTop : $('.table').offset().top-window.innerHeight/2+$('.table').height()/2,
+                        });
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="col l3 m4 s12">
+        <p style="text-align: center; argin-top: 10px; font-size: 80%; font-weight: 600;">
+            클릭하면 산출 근거를 보실 수 있습니다
+        </p>
+        <table style="cursor:pointer;" class="table centered bordered highlight">
+            <tbody>
+                <tr class="modal-trigger" id="modal-trigger-rt">
+                    <td>실근무 수당</td>
+                    <td id="rt"></td>
+                </tr>
+                <tr class="modal-trigger" id="modal-trigger-wkhol">
+                    <td>주휴 수당</td>
+                    <td id="wkhol"></td>
+                </tr>
+                <tr class="modal-trigger" id="modal-trigger-nt">
+                    <td>야간 수당</td>
+                    <td id="nt"></td>
+                </tr>
+                <tr class="modal-trigger" id="modal-trigger-extnd">
+                    <td>연장 수당</td>
+                    <td id="extnd"></td>
+                </tr>
+                <tr class="modal-trigger" id="modal-trigger-holid">
+                    <td>휴일 수당</td>
+                    <td id="holid"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div><!-- end of content row -->
 <script async src="//static.addtoany.com/menu/page.js"></script>
 
 <a style="position: fixed; bottom:0px; right:3px; z-index:10" class="hide-on-med-and-down" href="http://newslabfellows.com/61">
-	<img width="200px;" src="./static/img/choice/ninx2_yudo.png">
+    <img width="200px;" src="./static/img/choice/ninx2_yudo.png">
 </a>
 
 
 <!-- Modal -->
 
 <div id="modal-wkhol" class="modal">
-	<div class="modal-content">
-		<h5>5일 개근했다면</h5>
-		<p><div class="card-panel hoverable red white-text">
+    <div class="modal-content">
+        <h5>5일 개근했다면</h5>
+        <p><div class="card-panel hoverable red white-text">
 <span style="font-size: 19px;">근로기준법 제55조(휴일)</span><br>
 사용자는 근로자에게 1주일에 평균 1회 이상의 유급휴일을 주어야 한다.
 </div>
-<p>일주일 동안 15시간을 일했고, 개근했다면 '돈받고 쉬는 날'을 즐기세요. 주휴수당은 5일 근로자를 기준으로 하루 일당에 해당합니다.</p></p>	
-	</div>
+<p>일주일 동안 15시간을 일했고, 개근했다면 '돈받고 쉬는 날'을 즐기세요. 주휴수당은 5일 근로자를 기준으로 하루 일당에 해당합니다.</p></p>    
+    </div>
  </div>
 
 <div id="modal-nt" class="modal">
-	<div class="modal-content">
-		<h5>밤에 일하셨다면</h5>
-		<p><div class="card-panel hoverable red white-text">
+    <div class="modal-content">
+        <h5>밤에 일하셨다면</h5>
+        <p><div class="card-panel hoverable red white-text">
 <span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
 사용자는 야간근로(오후 10시부터 오전 6시)에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
 </div>
 <p>생활 리듬을 거스른 당신. 힘든 만큼 더 챙겨가세요.</p>
-<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
-	</div>
+<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>    
+    </div>
  </div>
 
 <div id="modal-rt" class="modal">
-	<div class="modal-content">
-		<h5>실근무 수당</h5>
-		<p>업무 시간에 시간을 곱한 기본 수당(업무 시간 X 시급)입니다.</p>	
-	</div>
+    <div class="modal-content">
+        <h5>실근무 수당</h5>
+        <p>업무 시간에 시간을 곱한 기본 수당(업무 시간 X 시급)입니다.</p>    
+    </div>
  </div>
 
 <div id="modal-extnd" class="modal">
-	<div class="modal-content">
-		<h5>더 일하셨다면</h5>
-		<p><div class="card-panel hoverable red white-text">
+    <div class="modal-content">
+        <h5>더 일하셨다면</h5>
+        <p><div class="card-panel hoverable red white-text">
 <span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
 사용자는 사용자는 연장근로에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
 </div>
 <p>일주일 법정 근로 시간인 40시간을 초과했다면, 초과한 시간의 급여는 시급의 1.5배입니다.</p>
- <p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
-	</div>
+ <p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>    
+    </div>
  </div>
 
 <div id="modal-holid" class="modal">
-	<div class="modal-content">
-		<h5>휴일에 일하셨다면</h5>
-		<p><div class="card-panel hoverable red white-text">
+    <div class="modal-content">
+        <h5>휴일에 일하셨다면</h5>
+        <p><div class="card-panel hoverable red white-text">
 <span style="font-size: 19px;">근로기준법 제56조(연장·야간 및 휴일 근로) 中</span><br>
 휴일근로에 대하여는 통상임금의 100분의 50 이상을 가산하여 지급하여야 한다.
 </div>
 <p>5월 1일 근로자의 날이나 유급 휴가 날에 일하셨다면 1.5배 가산된 금액을 받으세요.</p>
-<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>	
-	</div>
+<p>단, 이 조항은 5인 이상 사업장에만 적용됩니다.</p></p>    
+    </div>
  </div>
 
 <script src="./static/new_nin2/calc.js"></script>
 
-		<!--script-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-		<script>
-		(function($){
-			$(function(){
-				$('.button-collapse').sideNav();
-			}); 
-		})(jQuery);
-		</script>
-		<script>
-  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <!--script-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script>
+        (function($){
+            $(function(){
+                $('.button-collapse').sideNav();
+            }); 
+        })(jQuery);
+        </script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		ga('create', 'UA-72407780-3', 'auto');
-	  	ga('send', 'pageview');
-		</script>	
-	</body>
+        ga('create', 'UA-72407780-3', 'auto');
+          ga('send', 'pageview');
+        </script>    
+    </body>
 </html>

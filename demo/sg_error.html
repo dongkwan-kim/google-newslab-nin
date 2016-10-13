@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<meta property="og:title" content="내 지역구는 여권 우세? 야권 우세? 수도권 122개 지역구 &lt;1126개동&gt; 단위 분석 결과로 알아보자"/>
-		<meta property="og:type" content="website"/>
-		<meta property="og:url" content="http://nin.newslabfellows.com/sudogwon413/"/>
-		<meta property="og:description" content="최근 4차례 전국 선거에서 유권자가 실제로 투표했던 결과를 분석한 수도권 1126개 행정동의 표심을 웹으로 보여드립니다"/>
-		<meta property="og:image" content="http://nin.newslabfellows.com//media/vote/sudogwon413.jpg"/>
+        <meta property="og:title" content="내 지역구는 여권 우세? 야권 우세? 수도권 122개 지역구 &lt;1126개동&gt; 단위 분석 결과로 알아보자"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://nin.newslabfellows.com/sudogwon413/"/>
+        <meta property="og:description" content="최근 4차례 전국 선거에서 유권자가 실제로 투표했던 결과를 분석한 수도권 1126개 행정동의 표심을 웹으로 보여드립니다"/>
+        <meta property="og:image" content="http://nin.newslabfellows.com//media/vote/sudogwon413.jpg"/>
 
-		<meta name="description" content="최근 4차례 전국 선거에서 유권자가 실제로 투표했던 결과를 분석한 수도권 1126개 행정동의 표심을 웹으로 보여드립니다">
+        <meta name="description" content="최근 4차례 전국 선거에서 유권자가 실제로 투표했던 결과를 분석한 수도권 1126개 행정동의 표심을 웹으로 보여드립니다">
 
-		<meta name="author" content="nin">
-		<link id="favicon" rel="icon" href="">
-	
-		<title>수도권 표심은 어디로?</title>
-		
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
-		<link href="./static/new_nin2/font.css" rel="stylesheet">
-		<style>
-		.nav-min {
-			background-color: #10B5B1;
-		}
-		</style>
-	</head>
+        <meta name="author" content="nin">
+        <link id="favicon" rel="icon" href="">
+    
+        <title>수도권 표심은 어디로?</title>
+        
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">        
+        <link href="./static/new_nin2/font.css" rel="stylesheet">
+        <style>
+        .nav-min {
+            background-color: #10B5B1;
+        }
+        </style>
+    </head>
 
-	<body>
-		<nav class="nav-min" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="/">Home</a></li>
-					<li><a href="https://www.facebook.com/hankyoreh21">Contact</a></li>
-				</ul>
-				<ul id="nav-mobile" class="side-nav">
-					<li><a href="/">Home</a></li>
-					<li><a href="https://www.facebook.com/hankyoreh21">Contact</a></li>
-				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-			</div>
-		</nav>		
+    <body>
+        <nav class="nav-min" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="https://www.facebook.com/yooktam/" class="brand-logo">Nin</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://www.facebook.com/hankyoreh21">Contact</a></li>
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="https://www.facebook.com/hankyoreh21">Contact</a></li>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>        
 
 
 <link href="./static/vote/sudogwon.css" rel="stylesheet">
 
 <div class="section no-pad-bot" id="index-banner">
-	<div class="container">
-    	<br><br>
-		<h1 class="header-title center han21-text">{{big_msg}}</h1>
-     	<div class="row center">
-        	<div class="col l8 offset-l2 m10 offset-m1 s12">
-				<p class="header-comment col s12 light">
-					{{small_msg}}
-				</p>
-			</div>
-		</div>
-		<div class="collection">
-			<!--
-			{% for reg in regs_list %}
-			{% if reg.admin_region == "avg"%}
-        	<a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} 전체평균</a>
-			{% else %}
-        	<a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} {{reg.admin_region}}</a>
-			{% endif %}
-			{% endfor %}
+    <div class="container">
+        <br><br>
+        <h1 class="header-title center han21-text">{{big_msg}}</h1>
+         <div class="row center">
+            <div class="col l8 offset-l2 m10 offset-m1 s12">
+                <p class="header-comment col s12 light">
+                    {{small_msg}}
+                </p>
+            </div>
+        </div>
+        <div class="collection">
+            <!--
+            {% for reg in regs_list %}
+            {% if reg.admin_region == "avg"%}
+            <a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} 전체평균</a>
+            {% else %}
+            <a href="/sudogwon413/{{reg.region_id}}" class="collection-item">{{reg.wide_region}} {{reg.election_district}} {{reg.admin_region}}</a>
+            {% endif %}
+            {% endfor %}
 
-		-->
-      	</div>		
-		<div class="row center">
-			<a href="../sg_home.html" class="btn waves-effect waves-light" type="submit">되돌아가기
-				<i class="material-icons right">refresh</i>
-			</a>
-		</div>
-      	<br><br>
-	</div>
+        -->
+          </div>        
+        <div class="row center">
+            <a href="../sg_home.html" class="btn waves-effect waves-light" type="submit">되돌아가기
+                <i class="material-icons right">refresh</i>
+            </a>
+        </div>
+          <br><br>
+    </div>
 </div>
 
 <script>
 function get_url_params(){
     var params = {};
     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-    	function(str, key, value) {
-    		params[key] = value;
+        function(str, key, value) {
+            params[key] = value;
     });
     return params;
 } 
@@ -93,23 +93,23 @@ function get_url_params(){
 </script>
 
 
-		<!--script-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-		<script>
-		(function($){
-			$(function(){
-				$('.button-collapse').sideNav();
-			}); 
-		})(jQuery);
-		</script>
-		<script>
-  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        <!--script-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script>
+        (function($){
+            $(function(){
+                $('.button-collapse').sideNav();
+            }); 
+        })(jQuery);
+        </script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-		ga('create', 'UA-72407780-3', 'auto');
-	  	ga('send', 'pageview');
-		</script>	
-	</body>
+        ga('create', 'UA-72407780-3', 'auto');
+          ga('send', 'pageview');
+        </script>    
+    </body>
 </html>
