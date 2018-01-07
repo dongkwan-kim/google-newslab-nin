@@ -199,7 +199,7 @@ $(document).ready(function(){
 	
 	var is_first = true;
 	$("#refr-seegeup").click(function(){
-		$("#seegeup").val(6030);
+		$("#seegeup").val(7530);
 		price = get_pr();
 		$('#view-seegeup').text(get_readable_won(price));
 		modify_yg_table(price, get_time_from_tr(timerange, tr_mode), chosen_days, ecb_arr);
