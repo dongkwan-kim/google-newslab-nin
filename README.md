@@ -9,14 +9,14 @@
 - This repository has only Interactive News Contents. If you want to see other works such as video, visit our [facebook page](https://www.facebook.com/yooktam/)
 - List
   - NinNin [[Video]](https://www.youtube.com/watch?v=iADZ-3APX7A)
-  - Yookgap(price for your physical health) Calculator [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
-  - Language of Part-time job [[Prototype]](http://todoaskit.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
+  - Yookgap(price for your physical health) Calculator [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
+  - Language of Part-time job [[Prototype]](http://dongkwan-kim.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
 
 ## Another work
-- Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do) [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
+- Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do) [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
 
 
-## [Demo page](http://todoaskit.github.io/google-newslab-nin/)
+## [Demo page](http://dongkwan-kim.github.io/google-newslab-nin/)
 
 ### English
 
@@ -32,13 +32,13 @@
 #### List
 - Contents of Nin
   - NinNin [[Video]](https://www.youtube.com/watch?v=iADZ-3APX7A)
-  - Yookgap(price for your physical health) Calculator [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
-  - Language of Part-time job [[Prototype]](http://todoaskit.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
+  - Yookgap(price for your physical health) Calculator [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
+  - Language of Part-time job [[Prototype]](http://dongkwan-kim.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
 - Others
-  - Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do) [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
+  - Voting intentions of capital area(Seoul, Incheon, Gyeonggi-do) [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
 
 #### Related blog post
-- [Google Newslab Fellowship Epilogue](https://todoaskit.github.io/Google-Newslab-Fellowship-Epilogue/)
+- [Google Newslab Fellowship Epilogue](https://dongkwan-kim.github.io/Google-Newslab-Fellowship-Epilogue/)
 
 ### 한국어
 
@@ -54,10 +54,10 @@
 #### 목록
 - '닌'팀 콘텐츠
   - 닌닌 [[Video]](https://www.youtube.com/watch?v=iADZ-3APX7A)
-  - 육값계산기 [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
-  - 알바의 언어 [[Prototype]](http://todoaskit.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
+  - 육값계산기 [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/calc.html) [[Video]](https://www.youtube.com/watch?v=Z70ejKHjMq0)
+  - 알바의 언어 [[Prototype]](http://dongkwan-kim.github.io/google-newslab-nin/demo/network.html) [[Video]](https://www.youtube.com/watch?v=-qsBlBcKN4o) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41389.html)
 - Others
-  - 수도권 표심 계산기 [[Demo]](http://todoaskit.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
+  - 수도권 표심 계산기 [[Demo]](http://dongkwan-kim.github.io/google-newslab-nin/demo/sg_home.html) [[Article]](http://h21.hani.co.kr/arti/cover/cover_general/41482.html)
 
 #### 관련 블로그 포스트
-- [구글 뉴스랩 펠로우십 후기](https://todoaskit.github.io/Google-Newslab-Fellowship-Epilogue/)
+- [구글 뉴스랩 펠로우십 후기](https://dongkwan-kim.github.io/Google-Newslab-Fellowship-Epilogue/)
